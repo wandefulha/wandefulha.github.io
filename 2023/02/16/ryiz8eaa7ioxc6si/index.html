@@ -204,17 +204,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>Archives: 2023 | 钟学炫个人博客</title>
+  <title>回顾Spring（五）SpringBean生命周期 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/archives/2023/index.html">
+  <meta name="description" content="SpringBean 的过程包含：Bean 实例化，属性填充，Aware 接口属性注入，BeanPostProcessor 的 before 回调，InitializingBean 接口的初始化方法回调(afterProperties)，init 方法，BeanPostProcessor 的 after 回调，存入 SingletonObjects，本文将对这几个阶段进行回顾。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾Spring（五）SpringBean生命周期">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/16/ryiz8eaa7ioxc6si/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="SpringBean 的过程包含：Bean 实例化，属性填充，Aware 接口属性注入，BeanPostProcessor 的 before 回调，InitializingBean 接口的初始化方法回调(afterProperties)，init 方法，BeanPostProcessor 的 after 回调，存入 SingletonObjects，本文将对这几个阶段进行回顾。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676603456495-691dbfc9-85c5-4549-9360-148dde1375c8.png#averageHue=%233c4042&clientId=u7011f599-d9a7-4&from=paste&height=186&id=u91bfefd3&name=image.png&originHeight=325&originWidth=1181&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=42311&status=done&style=none&taskId=u38771dd7-77ec-4d06-b1b1-59698056fce&title=&width=674.8571428571429">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676605534550-ddedf47d-3473-4340-9bc9-631ad3a97653.png#averageHue=%23f6f6f6&clientId=u7011f599-d9a7-4&from=paste&height=287&id=u9b8c8406&name=image.png&originHeight=517&originWidth=793&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=8067&status=done&style=none&taskId=u0c8344d8-671c-4118-bea3-e01482f497f&title=&width=440.14288330078125">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676605692199-fb723cab-62e1-459c-8037-167f5c7ab921.png#averageHue=%237c9a74&clientId=u7011f599-d9a7-4&from=paste&height=613&id=ufec7148e&name=image.png&originHeight=1073&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=261230&status=done&style=none&taskId=u3a206589-59a3-4f85-8587-f5a9b697eb5&title=&width=1097.142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676612909159-559271e3-bfa2-4be2-a7c4-3221b04e41c7.png#averageHue=%232f2d2d&clientId=uc051adaf-6b05-4&from=paste&height=434&id=u3a495f90&name=image.png&originHeight=760&originWidth=1748&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=175712&status=done&style=none&taskId=ua1f69b65-ef20-45ee-abc8-c5adabe5a31&title=&width=998.8571428571429">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1676641158702-d5a80997-fcc1-4c17-8d48-92d35f348ab0.jpeg#averageHue=%23fafaf3&clientId=u0d35830c-6b54-4&from=paste&height=625&id=u14952fb2&name=er%E5%9B%BE.jpg&originHeight=1093&originWidth=1888&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162585&status=done&style=none&taskId=u93c0c849-8187-43b5-8bd2-48b2b0af2a8&title=&width=1078.857142857143">
+<meta property="article:published_time" content="2023-02-16T15:14:30.000Z">
+<meta property="article:modified_time" content="2023-02-17T13:45:25.194Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676603456495-691dbfc9-85c5-4549-9360-148dde1375c8.png#averageHue=%233c4042&clientId=u7011f599-d9a7-4&from=paste&height=186&id=u91bfefd3&name=image.png&originHeight=325&originWidth=1181&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=42311&status=done&style=none&taskId=u38771dd7-77ec-4d06-b1b1-59698056fce&title=&width=674.8571428571429">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -407,346 +417,295 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ryiz8eaa7ioxc6si" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      回顾Spring（五）SpringBean生命周期
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2023/02/16/ryiz8eaa7ioxc6si/" class="archive-article-date">
         <time datetime="2023-02-16T15:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">5分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+    <p>SpringBean 的过程包含：Bean 实例化，属性填充，Aware 接口属性注入，BeanPostProcessor 的 before 回调，InitializingBean 接口的初始化方法回调(afterProperties)，init 方法，BeanPostProcessor 的 after 回调，存入 SingletonObjects，本文将对这几个阶段进行回顾。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-SpringBean-的生命周期"><a href="#1-SpringBean-的生命周期" class="headerlink" title="1.SpringBean 的生命周期"></a>1.SpringBean 的生命周期</h1><p><strong>SpringBean 的生命周期包含三个阶段，分别是实例化、初始化、完成阶段。</strong><br>Bean 实例化阶段：Spring 会取出 BeanDefinition，判断其属性（单例？延迟？FactoryBean？），然后若是单例，则使用反射生成 Bean。<strong>注意这个时候的 Bean 只是一个空壳，内部属性等还未填充。</strong><br>Bean 初始化阶段：Bean 创建之后，对其属性填充，执行 Aware 接口方法、执行 BeanPostProcessor 方法 before、执行 InitializingBean 接口、执行自定义 Init 方法执行 BeanPostProcessor 方法 after。<br>Bean 完成阶段：Bean 此时已经成为了完整的 Bean，然后存放到 singletonObjects 中，至此就完成了整个生命周期。</p>
+<h1 id="2-Bean-属性填充"><a href="#2-Bean-属性填充" class="headerlink" title="2.Bean 属性填充"></a>2.Bean 属性填充</h1><p>在创建容器读取 XML 时，BeanDefinitionMap 里面的 Bean 信息有一个 PropertyValues 里面有对当前 Bean 的属性信息进行封装。（构造方法参数注入也是有在里面体现的，只不过不在 propertyValues 里面）<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676603456495-691dbfc9-85c5-4549-9360-148dde1375c8.png#averageHue=%233c4042&clientId=u7011f599-d9a7-4&from=paste&height=186&id=u91bfefd3&name=image.png&originHeight=325&originWidth=1181&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=42311&status=done&style=none&taskId=u38771dd7-77ec-4d06-b1b1-59698056fce&title=&width=674.8571428571429" alt="image.png"><br>属性填充的属性有三种形式：<br>1）基本数据类型（包含 String）：直接通过 setXXX 方法设置进去。<br>2）单向注入：注入单向对象引用属性时，从容器 getBean 获取后再 set 进去，若无该 Bean 则先实例后 set 进去。<br>3）双向注入：A 引用 B，A 先创建，发现 B 无，则先创 B，在创 B 注入属性 A 时直接注入半成品 A，然后完成所有 B 的生命周期，这时再返回 A 接着注入 B 以及后续的生命周期。</p>
+<hr>
+<p><strong>双向注入</strong>实现代码如下：<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676605534550-ddedf47d-3473-4340-9bc9-631ad3a97653.png#averageHue=%23f6f6f6&clientId=u7011f599-d9a7-4&from=paste&height=287&id=u9b8c8406&name=image.png&originHeight=517&originWidth=793&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=8067&status=done&style=none&taskId=u0c8344d8-671c-4118-bea3-e01482f497f&title=&width=440.14288330078125" alt="image.png"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">  https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span> &gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    双向注入--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;adminService&quot;</span> <span class="attr">name</span>=<span class="string">&quot;wwww2,12345&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.demo2.Service.Impl.AdminServiceImpl&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span> <span class="attr">lazy-init</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userService&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">name</span>=<span class="string">&quot;wwww1,1234&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.demo2.Service.Impl.UserServiceImpl&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;adminService&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;adminService&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdminServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">AdminService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUserService</span><span class="params">(UserService userService)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.userService=userService;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> UserService <span class="title function_">getUserService</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.userService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AdminServiceImpl</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AdminServiceImpl</span><span class="params">(Integer id)</span>&#123;</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> AdminService adminService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAdminService</span><span class="params">(AdminService adminService)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.adminService=adminService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserServiceImpl</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserServiceImpl</span><span class="params">(Integer id)</span>&#123;</span><br><span class="line">        System.out.println(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApplicationContextSpring4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        <span class="comment">//创建容器</span></span><br><span class="line">        ApplicationContext cls=<span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;classpath:applicationContext4.xml&quot;</span>);</span><br><span class="line">        <span class="comment">//容器取出bean</span></span><br><span class="line">        <span class="type">AdminService</span> <span class="variable">adminService</span> <span class="operator">=</span> (AdminService) cls.getBean(<span class="string">&quot;adminService&quot;</span>);</span><br><span class="line">        <span class="comment">//执行方法</span></span><br><span class="line">        System.out.println(adminService.getUserService());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676605692199-fb723cab-62e1-459c-8037-167f5c7ab921.png#averageHue=%237c9a74&clientId=u7011f599-d9a7-4&from=paste&height=613&id=ufec7148e&name=image.png&originHeight=1073&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=261230&status=done&style=none&taskId=u3a206589-59a3-4f85-8587-f5a9b697eb5&title=&width=1097.142857142857" alt="image.png"></p>
+<hr>
+<p><strong>深入源码看 Bean：在 DefaultSingletonBeanRegistry 中有三级 Bean 缓存</strong><br><strong>singletonObjects 是一级缓存，是 Bean 完整品</strong><br><strong>earlySingletonObjects 是二级缓存，Bean 初始品。Bean 已被引用，但未注入属性以及未完成后续的生命周期。</strong><br><strong>singletonFactories 是三级缓存，Bean 初始品。Bean 未被引用。</strong><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676612909159-559271e3-bfa2-4be2-a7c4-3221b04e41c7.png#averageHue=%232f2d2d&clientId=uc051adaf-6b05-4&from=paste&height=434&id=u3a495f90&name=image.png&originHeight=760&originWidth=1748&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=175712&status=done&style=none&taskId=ua1f69b65-ef20-45ee-abc8-c5adabe5a31&title=&width=998.8571428571429" alt="image.png"><br>（这里粗略了解三级缓存，后续将继续更加深入流程化的了解三级缓存）<br>先来解释一下名词：<br>实例化：Bean 刚出生就是实例化。<br>初始化：对实例化后的 Bean 进行属性填充以及其后续生命周期。</p>
+<hr>
+<p>用 AdminService 和 UserService 相互依赖来描述这一流程：<br>1.AdminService 实例化对象，但未进行初始化的操作，将其存储 singletonFactories 三级缓存中。 2.在对 AdminService 注入属性时，发现需要用到 UserService，而缓存中没有 UserService，则需要跳转去实例化 UserService。<br>3.UserService 实例化对象，存储 singletonFactories 三级缓存中。 4.注入 UserService 中的属性，也就是将 AdminService 注入到 UserService，那就是去三级缓存找到它，然后注入后，撤出三级缓存 singletonFactories，进入二级缓存 earlySingletonObjects. 5.执行 UserService 的后续生命周期，成为完整 Bean，将其撤出二级缓存 earlySingletonObjects，存入一级缓存 singletonObjects. 6.在 AdminService 中注入 UserService，撤出三级缓存 singletonFactories，存入二级缓存 earlySingletonObjects 7.执行完 AdminService 的其他生命周期，成为一个 Bean，撤出二级缓存 earlySingletonObjects，存入一级缓存 singletonObjects.</p>
+<hr>
+<h1 id="3-Aware-接口"><a href="#3-Aware-接口" class="headerlink" title="3.Aware 接口"></a>3.Aware 接口</h1><p><strong>Aware 接口：用来提供给业务层接触底层功能 API 的接口。通过实现 Aware 接口的方法，就可以让框架给业务层注入对象。</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aware 接口</th>
+<th>回调方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ServletContextAware</td>
+<td>setServletContext(ServletContext context)</td>
+<td>Spring 通过该方法注入 ServletContext 对象</td>
+</tr>
+<tr>
+<td>BeanFactoryAware</td>
+<td>setBeanFactory(BeanFactory factory)</td>
+<td>Spring 通过该方法注入 BeanFactory 对象</td>
+</tr>
+<tr>
+<td>BeanNameAware</td>
+<td>setBeanName(String beanName)</td>
+<td>Spring 通过该方法注入当前 Bean 在容器中的 BeanName</td>
+</tr>
+<tr>
+<td>ApplicationContextAware</td>
+<td>setApplicationContext(ApplicationContext applicationContext)</td>
+<td>Spring 通过该方法注入 ApplicationContext 对象</td>
+</tr>
+</tbody></table>
+<hr>
+<p>再对 IOC 整体流程图进行完善：<br><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1676641158702-d5a80997-fcc1-4c17-8d48-92d35f348ab0.jpeg#averageHue=%23fafaf3&clientId=u0d35830c-6b54-4&from=paste&height=625&id=u14952fb2&name=er%E5%9B%BE.jpg&originHeight=1093&originWidth=1888&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162585&status=done&style=none&taskId=u93c0c849-8187-43b5-8bd2-48b2b0af2a8&title=&width=1078.857142857143" alt="er图.jpg"></p>
+
+    
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/ryiz8eaa7ioxc6si/" target="_blank">回顾Spring（五）SpringBean生命周期</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/16/ryiz8eaa7ioxc6si/" title="回顾Spring（五）SpringBean生命周期" target="_blank">http://wandefulha.github.io/2023/02/16/ryiz8eaa7ioxc6si/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
-          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
 
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/16/ryiz8eaa7ioxc6si/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/uikua1afpd7xlotn/" class="archive-article-date">
-        <time datetime="2023-02-16T07:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/16/uikua1afpd7xlotn/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾Spring（四）几张图搞懂BeanFactory处理器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/uikua1afpd7xlotn/" target="_blank">回顾Spring（四）几张图搞懂BeanFactory处理器</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-SpringBean-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">1.SpringBean 的生命周期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Bean-%E5%B1%9E%E6%80%A7%E5%A1%AB%E5%85%85"><span class="toc-number">2.</span> <span class="toc-text">2.Bean 属性填充</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Aware-%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">3.Aware 接口</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/hrruh1pv6cqwnzrw/" class="archive-article-date">
-        <time datetime="2023-02-16T03:54:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/hrruh1pv6cqwnzrw/" target="_blank">回顾Spring（三）xml配置bean</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/xll7xc2wan28yi4m/" class="archive-article-date">
-        <time datetime="2023-02-15T14:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/xll7xc2wan28yi4m/" target="_blank">回顾Spring（二）BeanFactory（IOC的工厂）</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/bhf8muquziq07qr7/" class="archive-article-date">
-        <time datetime="2023-02-15T10:22:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/bhf8muquziq07qr7/" target="_blank">回顾Spring（一）IOC、AOP、DI的思想</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/14/txsmnxirp2xodh52/" class="archive-article-date">
-        <time datetime="2023-02-14T10:59:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/14/txsmnxirp2xodh52/" target="_blank">GIT（四）在Idea中使用GIT</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/guwmxx84d22i7chm/" class="archive-article-date">
-        <time datetime="2023-02-13T07:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/guwmxx84d22i7chm/" target="_blank">GIT（一）GIT的代码使用</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2023/page/2/">2</a><a class="extend next" rel="next" href="/archives/2023/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -787,8 +746,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

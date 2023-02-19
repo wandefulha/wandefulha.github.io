@@ -204,21 +204,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>回顾Spring（六）Spring与MyBatis整合 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/page/2/index.html">
+  <meta name="description" content="本文将回顾 Spring 与 Mybatis 的整合及其实现源码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾Spring（六）Spring与MyBatis整合">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/17/fudog92g0cogdtad/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="本文将回顾 Spring 与 Mybatis 的整合及其实现源码。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676647639658-083749fb-915d-42e6-b94a-23eeab2e2963.png#averageHue=%23545343&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=ueba20d28&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162591&status=done&style=none&taskId=u2a647cfa-cbef-41d6-90f5-a6d66c61ee0&title=&width=1097.142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648263820-fed6d473-1dd7-48b9-a076-dda768192683.png#averageHue=%232f2f2e&clientId=u840fa9c9-3dcc-4&from=paste&height=540&id=u01234dfb&name=image.png&originHeight=945&originWidth=2253&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=152394&status=done&style=none&taskId=u067e1710-3ade-4733-bad2-d0938133ca3&title=&width=1287.4285714285713">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648301206-d1616383-ec5f-4055-94ce-c00b6ba6659f.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=209&id=u5491c4ef&name=image.png&originHeight=366&originWidth=2237&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=88995&status=done&style=none&taskId=ue92df3d5-d3d8-40e7-aba3-c3b0924b72e&title=&width=1278.2857142857142">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648359949-a30e3286-9e54-4b0b-8a12-d7f62d80505e.png#averageHue=%2331302f&clientId=u840fa9c9-3dcc-4&from=paste&height=200&id=u63df5fd7&name=image.png&originHeight=350&originWidth=981&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=40123&status=done&style=none&taskId=u3c0b5034-55db-4e7f-befe-d29d64180c3&title=&width=560.5714285714286">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648421020-0b927cce-cb73-4441-9ba9-4f306a90d4cf.png#averageHue=%23605545&clientId=u840fa9c9-3dcc-4&from=paste&height=866&id=u2829fd1b&name=image.png&originHeight=1516&originWidth=2560&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=275328&status=done&style=none&taskId=u24d0d8d6-3999-4c56-9f5e-2879c6483fd&title=&width=1462.857142857143">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648507607-90720e4f-a21c-4f22-9428-2efa03dcd45b.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=620&id=uf951ffc0&name=image.png&originHeight=1085&originWidth=1570&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=222311&status=done&style=none&taskId=uf4ca10ed-ab8e-4025-8241-c573c51487f&title=&width=897.1428571428571">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648851650-f949a3e5-77e0-41ec-9045-4a26184f7dc9.png#averageHue=%23695a47&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=uf419470e&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=223366&status=done&style=none&taskId=u427cebd3-fb7f-47e9-be62-5d524fad3bf&title=&width=1097.142857142857">
+<meta property="article:published_time" content="2023-02-17T15:18:46.000Z">
+<meta property="article:modified_time" content="2023-02-19T08:11:38.161Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676647639658-083749fb-915d-42e6-b94a-23eeab2e2963.png#averageHue=%23545343&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=ueba20d28&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162591&status=done&style=none&taskId=u2a647cfa-cbef-41d6-90f5-a6d66c61ee0&title=&width=1097.142857142857">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -411,32 +419,53 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-ifsil6g4ngc6qf1o" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-fudog92g0cogdtad" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
+    <h1 class="article-title" itemprop="name">
+      回顾Spring（六）Spring与MyBatis整合
     </h1>
   
 
 
   
   
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/02/17/fudog92g0cogdtad/" class="archive-article-date">
+        <time datetime="2023-02-17T15:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-17</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">645字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -449,13 +478,84 @@
     
 
     
-    <p>很多人对 GIT 不了解，即使在大学里面听过一些教授的讲解，但是他们都没有讲解 GIT 是什么，为什么用 GIT，只是单纯扔个代码，做个实验，一节课就水过去了，所以本文档将对 GIT 进行初步的认识，不深入到 GIT 的使用和代码层面。</p>
+    <p>本文将回顾 Spring 与 Mybatis 的整合及其实现源码。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-Spring-与-Mybatis-整合快速案例"><a href="#1-Spring-与-Mybatis-整合快速案例" class="headerlink" title="1.Spring 与 Mybatis 整合快速案例"></a>1.Spring 与 Mybatis 整合快速案例</h1><p>Spring 整合 Mybatis 步骤如下： 1.导入 Mybatis 与 Spring 整合的 maven 坐标 2.编写 Mapper Mapper.xml 3.把 dataSource、SqlSessionFactoryBean、MapperScannerConfigurer 扔给 Spring 容器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">  https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span> &gt;</span></span><br><span class="line">  <span class="comment">&lt;!--配置数据源--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/helloword&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;111111&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--配置SqlSessionFactoryBean--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--配置Mapper包扫描--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.example.mapper&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">HelloMapper</span> &#123;</span><br><span class="line">    List&lt;Hello&gt; <span class="title function_">getHellos</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta"><span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta"><span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.example.mapper.HelloMapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getHellos&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;org.example.domain.Hello&quot;</span>&gt;</span></span><br><span class="line">    select * from hello</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">( String[] args )</span></span><br><span class="line">&#123;</span><br><span class="line">    ClassPathXmlApplicationContext applicationContext=<span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;classpath:applicationContext.xml&quot;</span>);</span><br><span class="line">    HelloMapper helloMapper=applicationContext.getBean(HelloMapper.class);</span><br><span class="line">    List&lt;Hello&gt; all=helloMapper.getHellos();</span><br><span class="line">    System.out.println(all.get(<span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676647639658-083749fb-915d-42e6-b94a-23eeab2e2963.png#averageHue=%23545343&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=ueba20d28&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162591&status=done&style=none&taskId=u2a647cfa-cbef-41d6-90f5-a6d66c61ee0&title=&width=1097.142857142857" alt="image.png"></p>
+<hr>
+<h1 id="2-深入源码剖析"><a href="#2-深入源码剖析" class="headerlink" title="2.深入源码剖析"></a>2.深入源码剖析</h1><p>Spring 整合 MyBatis 的原理：<br>实例化 SqlSessionFactoryBean，接着 MapperScannerConfigurer 扫描 Mapper 并通过动态代理产生 Mapper 的实现类注入到 Spring 容器中。</p>
+<hr>
+<p>SqlSessionFactoryBean：需要进行配置，用于提供 SqlSessionFactory;<br>MapperScannerConfigurer：需要进行配置，用于扫描指定 mapper 注册 BeanDefinition；<br>MapperFactoryBean：Mapper 的 FactoryBean，获得指定 Mapper 时调用 getObjects 方法；<br>ClassPathMapperScanner：通过 setAutowiredMode 设置装配模式为通过名字，所以 MapperFactoryBean 中的 setSqlSessionFactory 会自动注入。</p>
+<hr>
+<p>如图，SqlSessionFactoryBean 有两个主要的实现接口，即 FactoryBean&lt;?&gt;,InitiaizingBean<br>InitiaizingBean 会提供一个 afterPropertiesSet 的方法，实现该方法，即可在注入属性时候回调该方法。<br>图中，它把 SqlSessionFactory 工厂创建起来，存到了变量中。<br>然后，FactoryBean 就提供了 getObjects 方法，负责返回 SqlsessionFactory。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648263820-fed6d473-1dd7-48b9-a076-dda768192683.png#averageHue=%232f2f2e&clientId=u840fa9c9-3dcc-4&from=paste&height=540&id=u01234dfb&name=image.png&originHeight=945&originWidth=2253&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=152394&status=done&style=none&taskId=u067e1710-3ade-4733-bad2-d0938133ca3&title=&width=1287.4285714285713" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648301206-d1616383-ec5f-4055-94ce-c00b6ba6659f.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=209&id=u5491c4ef&name=image.png&originHeight=366&originWidth=2237&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=88995&status=done&style=none&taskId=ue92df3d5-d3d8-40e7-aba3-c3b0924b72e&title=&width=1278.2857142857142" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648359949-a30e3286-9e54-4b0b-8a12-d7f62d80505e.png#averageHue=%2331302f&clientId=u840fa9c9-3dcc-4&from=paste&height=200&id=u63df5fd7&name=image.png&originHeight=350&originWidth=981&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=40123&status=done&style=none&taskId=u3c0b5034-55db-4e7f-befe-d29d64180c3&title=&width=560.5714285714286" alt="image.png"></p>
+<hr>
+<p>MapperScannerConfigurer 是用来扫描 Mapper，向容器中注册 Mapper 对应的 MapperFactoryBean。<br>MapperScannerConfigurer 主要实现了 BeanDefinitionRegistryPostProcessor 接口。<br>BeanDefinitionRegistryPostProcessor 提供了 postProcessBeanDefinitionRegistry 用来在导入完 BeanDefinition 后实行的，可用来自行注册 BeanDefinition。<br>BeanDefinitionRegistryPostProcessor 使用了 ClassPathMapperScanner 用来扫描包下的 Mapper，然后注册对应 MapperFactoryBean 为 BeanDefinition。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648421020-0b927cce-cb73-4441-9ba9-4f306a90d4cf.png#averageHue=%23605545&clientId=u840fa9c9-3dcc-4&from=paste&height=866&id=u2829fd1b&name=image.png&originHeight=1516&originWidth=2560&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=275328&status=done&style=none&taskId=u24d0d8d6-3999-4c56-9f5e-2879c6483fd&title=&width=1462.857142857143" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648507607-90720e4f-a21c-4f22-9428-2efa03dcd45b.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=620&id=uf951ffc0&name=image.png&originHeight=1085&originWidth=1570&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=222311&status=done&style=none&taskId=uf4ca10ed-ab8e-4025-8241-c573c51487f&title=&width=897.1428571428571" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648851650-f949a3e5-77e0-41ec-9045-4a26184f7dc9.png#averageHue=%23695a47&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=uf419470e&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=223366&status=done&style=none&taskId=u427cebd3-fb7f-47e9-be62-5d524fad3bf&title=&width=1097.142857142857" alt="image.png"></p>
+
     
-    <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/17/fudog92g0cogdtad/" title="回顾Spring（六）Spring与MyBatis整合" target="_blank">http://wandefulha.github.io/2023/02/17/fudog92g0cogdtad/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +565,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/17/fudog92g0cogdtad/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/16/ryiz8eaa7ioxc6si/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾Spring（五）SpringBean生命周期</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,100 +649,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mi0y1qt2a7v7ugu6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/11/mi0y1qt2a7v7ugu6/" target="_blank">hexo部署到github的实现过程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/11/mi0y1qt2a7v7ugu6/" class="archive-article-date">
-        <time datetime="2023-02-11T14:01:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>实现 hexo 与 github 的整合，将 hexo 静态页面博客部署到 github 中，从而通过 github 地址访问 hexo….</p>
-    
-    <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Spring-%E4%B8%8E-Mybatis-%E6%95%B4%E5%90%88%E5%BF%AB%E9%80%9F%E6%A1%88%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">1.Spring 与 Mybatis 整合快速案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%B7%B1%E5%85%A5%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2.深入源码剖析</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -622,8 +715,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

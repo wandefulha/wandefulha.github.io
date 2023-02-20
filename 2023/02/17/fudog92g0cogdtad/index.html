@@ -223,7 +223,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648507607-90720e4f-a21c-4f22-9428-2efa03dcd45b.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=620&id=uf951ffc0&name=image.png&originHeight=1085&originWidth=1570&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=222311&status=done&style=none&taskId=uf4ca10ed-ab8e-4025-8241-c573c51487f&title=&width=897.1428571428571">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648851650-f949a3e5-77e0-41ec-9045-4a26184f7dc9.png#averageHue=%23695a47&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=uf419470e&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=223366&status=done&style=none&taskId=u427cebd3-fb7f-47e9-be62-5d524fad3bf&title=&width=1097.142857142857">
 <meta property="article:published_time" content="2023-02-17T15:18:46.000Z">
-<meta property="article:modified_time" content="2023-02-19T08:11:38.161Z">
+<meta property="article:modified_time" content="2023-02-20T04:07:33.025Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676647639658-083749fb-915d-42e6-b94a-23eeab2e2963.png#averageHue=%23545343&clientId=u840fa9c9-3dcc-4&from=paste&height=590&id=ueba20d28&name=image.png&originHeight=1032&originWidth=1920&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=162591&status=done&style=none&taskId=u2a647cfa-cbef-41d6-90f5-a6d66c61ee0&title=&width=1097.142857142857">
@@ -495,7 +495,7 @@
 <hr>
 <h1 id="2-深入源码剖析"><a href="#2-深入源码剖析" class="headerlink" title="2.深入源码剖析"></a>2.深入源码剖析</h1><p>Spring 整合 MyBatis 的原理：<br>实例化 SqlSessionFactoryBean，接着 MapperScannerConfigurer 扫描 Mapper 并通过动态代理产生 Mapper 的实现类注入到 Spring 容器中。</p>
 <hr>
-<p>SqlSessionFactoryBean：需要进行配置，用于提供 SqlSessionFactory;<br>MapperScannerConfigurer：需要进行配置，用于扫描指定 mapper 注册 BeanDefinition；<br>MapperFactoryBean：Mapper 的 FactoryBean，获得指定 Mapper 时调用 getObjects 方法；<br>ClassPathMapperScanner：通过 setAutowiredMode 设置装配模式为通过名字，所以 MapperFactoryBean 中的 setSqlSessionFactory 会自动注入。</p>
+<p>SqlSessionFactoryBean：需要进行配置，用于提供 SqlSessionFactory;<br>MapperScannerConfigurer：需要进行配置，用于扫描指定 mapper 注册 BeanDefinition；<br>MapperFactoryBean：Mapper 的 FactoryBean，获得指定 Mapper 时调用 getObjects 方法；<br>ClassPathMapperScanner：通过 setAutowiredMode 设置装配模式为通过名字，所以 ClassPathMapperScanner 中的 setSqlSessionFactory 会自动注入。</p>
 <hr>
 <p>如图，SqlSessionFactoryBean 有两个主要的实现接口，即 FactoryBean&lt;?&gt;,InitiaizingBean<br>InitiaizingBean 会提供一个 afterPropertiesSet 的方法，实现该方法，即可在注入属性时候回调该方法。<br>图中，它把 SqlSessionFactory 工厂创建起来，存到了变量中。<br>然后，FactoryBean 就提供了 getObjects 方法，负责返回 SqlsessionFactory。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648263820-fed6d473-1dd7-48b9-a076-dda768192683.png#averageHue=%232f2f2e&clientId=u840fa9c9-3dcc-4&from=paste&height=540&id=u01234dfb&name=image.png&originHeight=945&originWidth=2253&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=152394&status=done&style=none&taskId=u067e1710-3ade-4733-bad2-d0938133ca3&title=&width=1287.4285714285713" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648301206-d1616383-ec5f-4055-94ce-c00b6ba6659f.png#averageHue=%232f2e2d&clientId=u840fa9c9-3dcc-4&from=paste&height=209&id=u5491c4ef&name=image.png&originHeight=366&originWidth=2237&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=88995&status=done&style=none&taskId=ue92df3d5-d3d8-40e7-aba3-c3b0924b72e&title=&width=1278.2857142857142" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676648359949-a30e3286-9e54-4b0b-8a12-d7f62d80505e.png#averageHue=%2331302f&clientId=u840fa9c9-3dcc-4&from=paste&height=200&id=u63df5fd7&name=image.png&originHeight=350&originWidth=981&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=40123&status=done&style=none&taskId=u3c0b5034-55db-4e7f-befe-d29d64180c3&title=&width=560.5714285714286" alt="image.png"></p>
 <hr>
@@ -626,6 +626,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2023/02/19/yfpo0og6ok2vsrs8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          回顾Spring（七）从源码看解析自定义命名空间
+        
+      </div>
+    </a>
   
   
     <a href="/2023/02/16/ryiz8eaa7ioxc6si/" id="article-nav-older" class="article-nav-link-wrap">

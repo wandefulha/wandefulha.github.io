@@ -204,17 +204,50 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>Archives: 2023 | 钟学炫个人博客</title>
+  <title>回顾Spring（七）从源码看解析自定义命名空间 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/archives/2023/index.html">
+  <meta name="description" content="本文将从 spring 源码看解析自定义命名空间。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾Spring（七）从源码看解析自定义命名空间">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/19/yfpo0og6ok2vsrs8/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="本文将从 spring 源码看解析自定义命名空间。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813455508-4b1266bf-37f2-485c-bc77-70b692d528c8.png#averageHue=%232d2d2c&clientId=ub630fdc2-7837-4&from=paste&height=437&id=u7266849e&name=image.png&originHeight=437&originWidth=1749&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=47655&status=done&style=none&taskId=u779b9519-0d92-4035-865a-52591174546&title=&width=1749">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813953706-a134101b-bf77-4b0b-8c83-7539151625e8.png#averageHue=%23695b46&clientId=u15fce5cb-8bd1-4&from=paste&height=1382&id=u0dfc7f19&name=image.png&originHeight=1382&originWidth=1941&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=280691&status=done&style=none&taskId=u9117f41e-3ecc-4642-ac76-c6aa87bf194&title=&width=1941">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813874519-7132ed43-af22-4af5-9cf9-ceb9ee7edc86.png#averageHue=%23302f2e&clientId=u15fce5cb-8bd1-4&from=paste&height=304&id=u75ea82eb&name=image.png&originHeight=304&originWidth=1374&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=35555&status=done&style=none&taskId=u58451eae-370c-40a5-9f38-4273f3d1bfe&title=&width=1374">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814095681-867a6c5b-6827-4907-8bb3-ef366a31a72a.png#averageHue=%232f2e2d&clientId=u15fce5cb-8bd1-4&from=paste&height=1188&id=uba87e417&name=image.png&originHeight=1188&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=215511&status=done&style=none&taskId=uce9bc60a-0ede-475f-b7a1-8edc7d89272&title=&width=1908">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814503565-493c2ebe-8079-46fc-97a3-9b728a484216.png#averageHue=%23665845&clientId=u15fce5cb-8bd1-4&from=paste&height=971&id=u6270e1b7&name=image.png&originHeight=971&originWidth=1873&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=184094&status=done&style=none&taskId=ucd518ed7-bbed-4dc5-bdda-d1b1fac6791&title=&width=1873">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814443803-d260af8b-877c-4c0e-8dea-801834bceedd.png#averageHue=%23302f2e&clientId=u15fce5cb-8bd1-4&from=paste&height=413&id=u8e8b4290&name=image.png&originHeight=413&originWidth=1726&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=81102&status=done&style=none&taskId=ud276eb06-e0f7-4734-80de-e0d2c60eb02&title=&width=1726">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814815848-7417adcb-46a5-4489-8e9d-439373f88188.png#averageHue=%2331302f&clientId=u15fce5cb-8bd1-4&from=paste&height=947&id=uec59bb10&name=image.png&originHeight=947&originWidth=1870&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=162845&status=done&style=none&taskId=u575a69ea-1d30-46ac-9313-83a4e56d614&title=&width=1870">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814912693-56184b86-edcc-4be6-9837-8ab31babe0ba.png#averageHue=%232d2c2c&clientId=u15fce5cb-8bd1-4&from=paste&height=707&id=ue7baa043&name=image.png&originHeight=707&originWidth=1718&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=93195&status=done&style=none&taskId=ud77b4c0f-1eb2-4805-b949-d369c6057fd&title=&width=1718">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815048315-76d00e76-99ed-4e0c-b013-f303690608a7.png#averageHue=%232e2d2c&clientId=u15fce5cb-8bd1-4&from=paste&height=274&id=ue7981c94&name=image.png&originHeight=274&originWidth=1765&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=42648&status=done&style=none&taskId=u52586003-7dff-40c7-a625-392c7bb7ee9&title=&width=1765">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815366506-b9b54043-214e-4ea9-9cab-54a13fb93141.png#averageHue=%232e2d2c&clientId=ue5a34100-0753-4&from=paste&height=848&id=u905f57e2&name=image.png&originHeight=848&originWidth=1705&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=142789&status=done&style=none&taskId=ucffe337a-8f01-4424-9a4f-7d2a637fd7b&title=&width=1705">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676863989005-b6778be1-3955-4581-9ef5-941f2d0a1a29.png#averageHue=%232d2c2c&clientId=uf848af8a-24c6-4&from=paste&height=678&id=uc200e105&name=image.png&originHeight=678&originWidth=1508&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=79362&status=done&style=none&taskId=u92d024d0-dd40-4606-b2e8-55502394ad6&title=&width=1508">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815882105-04f4a907-90d6-43d0-b46b-b281b8749b13.png#averageHue=%232d2c2b&clientId=ue5a34100-0753-4&from=paste&height=267&id=u11fda9ea&name=image.png&originHeight=267&originWidth=1734&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=41500&status=done&style=none&taskId=ue589ea40-0def-4d82-81f6-bead5c5eb28&title=&width=1734">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816064272-16762533-4a88-4659-af0d-a24867919857.png#averageHue=%23302f2e&clientId=ue5a34100-0753-4&from=paste&height=1308&id=ud6a39cdd&name=image.png&originHeight=1308&originWidth=1807&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=225331&status=done&style=none&taskId=u5dd167c0-60a1-4703-b252-f4f35d76da7&title=&width=1807">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816332002-2bef750a-5559-484e-b3ca-7b8c3274add8.png#averageHue=%232d2d2c&clientId=ue5a34100-0753-4&from=paste&height=734&id=u06ddc231&name=image.png&originHeight=734&originWidth=2044&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=161846&status=done&style=none&taskId=u771814fe-fd8f-45c7-84ce-87c452b8776&title=&width=2044">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816460656-a3cbdcee-009c-4770-bf48-75979529e469.png#averageHue=%232e2d2c&clientId=ue5a34100-0753-4&from=paste&height=391&id=u2b9b6822&name=image.png&originHeight=391&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=81057&status=done&style=none&taskId=u66058a25-3aa2-44b0-902d-ed31e36f4fd&title=&width=1908">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816683629-36dd5c2a-45b6-4339-ac93-0649e4ce3480.png#averageHue=%235f5546&clientId=ue5a34100-0753-4&from=paste&height=649&id=udc3180c8&name=image.png&originHeight=649&originWidth=1605&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=90468&status=done&style=none&taskId=u536a2b1d-5801-4f08-93e4-248b7a13134&title=&width=1605">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676859729014-cf7f69bb-a935-4f2f-97e9-8127a15b6c4b.png#averageHue=%232d2c2b&clientId=uf848af8a-24c6-4&from=paste&height=1030&id=ufc57a617&name=image.png&originHeight=1030&originWidth=1925&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=219719&status=done&style=none&taskId=uf17c350b-43d8-428a-8e98-b2c3337722d&title=&width=1925">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860338307-cdd2b80f-ae24-4b98-b39a-06470073206d.png#averageHue=%23302f2e&clientId=uf848af8a-24c6-4&from=paste&height=1036&id=ud4fde77a&name=image.png&originHeight=1036&originWidth=2097&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=199346&status=done&style=none&taskId=ua933ff80-1c4b-4afb-afeb-feed2c98f81&title=&width=2097">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860436414-a0234447-85cf-4611-bd85-912eb3975661.png#averageHue=%232c2c2b&clientId=uf848af8a-24c6-4&from=paste&height=285&id=u964a252e&name=image.png&originHeight=285&originWidth=1866&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=43835&status=done&style=none&taskId=udb94a1be-35ff-459d-8ab6-169740bc131&title=&width=1866">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860570884-c5921d60-083f-41b6-abca-57c7ffa8a5d0.png#averageHue=%23302e2d&clientId=uf848af8a-24c6-4&from=paste&height=950&id=u8fd72664&name=image.png&originHeight=950&originWidth=2022&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=145743&status=done&style=none&taskId=u52f2b84f-6a6c-4cc3-a89c-e16bedb7f49&title=&width=2022">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860828240-3f15190c-4131-4432-9d4a-f25b785356f6.png#averageHue=%235d7c57&clientId=uf848af8a-24c6-4&from=paste&height=1516&id=u25d3ddc8&name=image.png&originHeight=1516&originWidth=2560&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=429095&status=done&style=none&taskId=u6a51f1c3-bbdd-4522-a2bc-27ce568248a&title=&width=2560">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676812951947-c27fa9c8-1278-4338-8dff-167c7305a371.png#averageHue=%232e2e2d&clientId=u9ea2d4b5-5592-4&from=paste&height=993&id=u03dba4d9&name=image.png&originHeight=993&originWidth=2288&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=215318&status=done&style=none&taskId=uc10f7772-fa9d-48eb-a05c-cbf3b28ecdb&title=&width=2288">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1676865628577-c020e895-100e-45b0-a2ce-4c28a8f5bc49.jpeg#averageHue=%23f9f9f9&clientId=uf848af8a-24c6-4&from=paste&id=u1677af0f&name=%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.jpg&originHeight=623&originWidth=3660&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=172780&status=done&style=none&taskId=uefebf8cc-d490-483a-95d0-145f7056011&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676812967620-ef716154-cf8f-4042-a615-c7ea9e2828f5.png#averageHue=%232f2f2e&clientId=u9ea2d4b5-5592-4&from=paste&height=812&id=u1a5c49e3&name=image.png&originHeight=812&originWidth=2127&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=169439&status=done&style=none&taskId=u150bd79d-93b6-413d-81d8-5fff4721834&title=&width=2127">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813038429-b70446d6-b0a7-422c-be56-64b33ca602bd.png#averageHue=%23302f2f&clientId=u9ea2d4b5-5592-4&from=paste&height=1183&id=ub7030e8d&name=image.png&originHeight=1183&originWidth=2448&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=218070&status=done&style=none&taskId=u06742102-2ce2-40b7-9886-7d8a706408a&title=&width=2448">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813094636-18c27ec6-db2b-4966-9397-50e86dbdc2f7.png#averageHue=%23625644&clientId=u9ea2d4b5-5592-4&from=paste&height=1164&id=u66e0d11d&name=image.png&originHeight=1164&originWidth=2434&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=265147&status=done&style=none&taskId=ue09455a9-08e6-4f4c-8849-28279b67fb3&title=&width=2434">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813155960-fe15cef9-688f-438d-bf8f-8caf4ed55109.png#averageHue=%23302f2e&clientId=u9ea2d4b5-5592-4&from=paste&height=638&id=u6e5bc9eb&name=image.png&originHeight=638&originWidth=2131&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=109158&status=done&style=none&taskId=u04b5645d-e7ee-40d3-959c-672108d7e6d&title=&width=2131">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676865930035-69e70cfd-cfb7-4361-8b4e-52505327a2c6.png#averageHue=%23f5f4f4&clientId=uf848af8a-24c6-4&from=paste&height=861&id=u7f0672ef&name=image.png&originHeight=861&originWidth=1115&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=19027&status=done&style=none&taskId=ufab72b21-3677-490b-8ddc-8e7669120fa&title=&width=1115">
+<meta property="article:published_time" content="2023-02-19T08:58:27.000Z">
+<meta property="article:modified_time" content="2023-02-20T04:07:33.029Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813455508-4b1266bf-37f2-485c-bc77-70b692d528c8.png#averageHue=%232d2d2c&clientId=ub630fdc2-7837-4&from=paste&height=437&id=u7266849e&name=image.png&originHeight=437&originWidth=1749&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=47655&status=done&style=none&taskId=u779b9519-0d92-4035-865a-52591174546&title=&width=1749">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -407,346 +440,250 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-yfpo0og6ok2vsrs8" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      回顾Spring（七）从源码看解析自定义命名空间
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2023/02/19/yfpo0og6ok2vsrs8/" class="archive-article-date">
         <time datetime="2023-02-19T08:58:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-19</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">871字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+    <p>本文将从 spring 源码看解析自定义命名空间。</p>
+<span id="more"></span>
+
+<hr>
+<p>Spring 容器的万物之源是 ClassPathXmlApplicationContext 中的 refresh 方法，它就是 init 方法（初始化方法）！！所以，debug 从这里一路找下去，总能找到想要的玩意。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813455508-4b1266bf-37f2-485c-bc77-70b692d528c8.png#averageHue=%232d2d2c&clientId=ub630fdc2-7837-4&from=paste&height=437&id=u7266849e&name=image.png&originHeight=437&originWidth=1749&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=47655&status=done&style=none&taskId=u779b9519-0d92-4035-865a-52591174546&title=&width=1749" alt="image.png"><br>在 refresh 中有 obtainFreshBeanFactory 方法，顾名思义：获取新的 Bean 工厂。但是它还有解析配置的功能。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813953706-a134101b-bf77-4b0b-8c83-7539151625e8.png#averageHue=%23695b46&clientId=u15fce5cb-8bd1-4&from=paste&height=1382&id=u0dfc7f19&name=image.png&originHeight=1382&originWidth=1941&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=280691&status=done&style=none&taskId=u9117f41e-3ecc-4642-ac76-c6aa87bf194&title=&width=1941" alt="image.png"><br>obtainFreshBeanFactory 里面又有一个 refreshBeanFactory 方法，顾名思义：刷新 bean 工厂，也就是 init 方法。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813874519-7132ed43-af22-4af5-9cf9-ceb9ee7edc86.png#averageHue=%23302f2e&clientId=u15fce5cb-8bd1-4&from=paste&height=304&id=u75ea82eb&name=image.png&originHeight=304&originWidth=1374&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=35555&status=done&style=none&taskId=u58451eae-370c-40a5-9f38-4273f3d1bfe&title=&width=1374" alt="image.png"><br>进入后，发现在里面有个 createBeanFactory 创建 Bean 工厂。与此同时，还有 loadBeanDefinitions 方法用来加载 BeanDefinition 中<strong>。即：将 xml 转换成 bd。</strong><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814095681-867a6c5b-6827-4907-8bb3-ef366a31a72a.png#averageHue=%232f2e2d&clientId=u15fce5cb-8bd1-4&from=paste&height=1188&id=uba87e417&name=image.png&originHeight=1188&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=215511&status=done&style=none&taskId=uce9bc60a-0ede-475f-b7a1-8edc7d89272&title=&width=1908" alt="image.png"><br>发现里面有一个 XmlBeanDefinitionReader 用来创建 xmlBD 读取器，通过它来读 xml 并且对应成 BeanDefinition。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814503565-493c2ebe-8079-46fc-97a3-9b728a484216.png#averageHue=%23665845&clientId=u15fce5cb-8bd1-4&from=paste&height=971&id=u6270e1b7&name=image.png&originHeight=971&originWidth=1873&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=184094&status=done&style=none&taskId=ucd518ed7-bbed-4dc5-bdda-d1b1fac6791&title=&width=1873" alt="image.png"><br>上面那个方法暂时不管，接着进入 loadBeanDefinitions 的重载方法，并把 xml 读取器扔给它。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814443803-d260af8b-877c-4c0e-8dea-801834bceedd.png#averageHue=%23302f2e&clientId=u15fce5cb-8bd1-4&from=paste&height=413&id=u8e8b4290&name=image.png&originHeight=413&originWidth=1726&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=81102&status=done&style=none&taskId=ud276eb06-e0f7-4734-80de-e0d2c60eb02&title=&width=1726" alt="image.png"><br>进去之后发现，它又封装一个方法，就是获取 xml 配置文件，然后继续 loadBeanDefinition，并把 xml 配置文件扔给它。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814815848-7417adcb-46a5-4489-8e9d-439373f88188.png#averageHue=%2331302f&clientId=u15fce5cb-8bd1-4&from=paste&height=947&id=uec59bb10&name=image.png&originHeight=947&originWidth=1870&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=162845&status=done&style=none&taskId=u575a69ea-1d30-46ac-9313-83a4e56d614&title=&width=1870" alt="image.png"><br>进去后发现，它获取传来的 xml 配置文件的个数，并且对它遍历执行 loadBeanDefinition，并且扔给它当前遍历的 xml 配置文件。。。。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676814912693-56184b86-edcc-4be6-9837-8ab31babe0ba.png#averageHue=%232d2c2c&clientId=u15fce5cb-8bd1-4&from=paste&height=707&id=ue7baa043&name=image.png&originHeight=707&originWidth=1718&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=93195&status=done&style=none&taskId=ud77b4c0f-1eb2-4805-b949-d369c6057fd&title=&width=1718" alt="image.png"><br>然后又又又 loadBeanDefinition，把配置文件 xml 地址扔过去。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815048315-76d00e76-99ed-4e0c-b013-f303690608a7.png#averageHue=%232e2d2c&clientId=u15fce5cb-8bd1-4&from=paste&height=274&id=ue7981c94&name=image.png&originHeight=274&originWidth=1765&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=42648&status=done&style=none&taskId=u52586003-7dff-40c7-a625-392c7bb7ee9&title=&width=1765" alt="image.png"><br>进去发现有一个 getResourceLoader 方法，这是一个静态资源加载器用来获取静态资源。加载前面传来的地址的静态资源，然后继续扔给 loadBeanDefinitions。。。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815366506-b9b54043-214e-4ea9-9cab-54a13fb93141.png#averageHue=%232e2d2c&clientId=ue5a34100-0753-4&from=paste&height=848&id=u905f57e2&name=image.png&originHeight=848&originWidth=1705&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=142789&status=done&style=none&taskId=ucffe337a-8f01-4424-9a4f-7d2a637fd7b&title=&width=1705" alt="image.png"><br>进去后循环遍历静态资源的个数，接着又看到了 loadBeanDefinitions，把当前遍历的静态资源扔给它。。。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676863989005-b6778be1-3955-4581-9ef5-941f2d0a1a29.png#averageHue=%232d2c2c&clientId=uf848af8a-24c6-4&from=paste&height=678&id=uc200e105&name=image.png&originHeight=678&originWidth=1508&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=79362&status=done&style=none&taskId=u92d024d0-dd40-4606-b2e8-55502394ad6&title=&width=1508" alt="image.png"><br>继续 loadBeanDefinitions，只不过这一回是进入了 XMLBeanDefinitionReader 对 Resource 进一步封装。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676815882105-04f4a907-90d6-43d0-b46b-b281b8749b13.png#averageHue=%232d2c2b&clientId=ue5a34100-0753-4&from=paste&height=267&id=u11fda9ea&name=image.png&originHeight=267&originWidth=1734&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=41500&status=done&style=none&taskId=ue589ea40-0def-4d82-81f6-bead5c5eb28&title=&width=1734" alt="image.png"><br>这一回是把资源转换为输入流，接着执行真正的 loadBeanDefinitions 方法，即 doLoadBeanDefinitions，并把流给它。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816064272-16762533-4a88-4659-af0d-a24867919857.png#averageHue=%23302f2e&clientId=ue5a34100-0753-4&from=paste&height=1308&id=ud6a39cdd&name=image.png&originHeight=1308&originWidth=1807&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=225331&status=done&style=none&taskId=u5dd167c0-60a1-4703-b252-f4f35d76da7&title=&width=1807" alt="image.png"><br>然后进一步将资源封装成文档 Document 类型，并且调用 registerBeanDefinitions。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816332002-2bef750a-5559-484e-b3ca-7b8c3274add8.png#averageHue=%232d2d2c&clientId=ue5a34100-0753-4&from=paste&height=734&id=u06ddc231&name=image.png&originHeight=734&originWidth=2044&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=161846&status=done&style=none&taskId=u771814fe-fd8f-45c7-84ce-87c452b8776&title=&width=2044" alt="image.png"><br>接着创建一个文档读取器，并且继续调用 registerBeanDefinitions。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816460656-a3cbdcee-009c-4770-bf48-75979529e469.png#averageHue=%232e2d2c&clientId=ue5a34100-0753-4&from=paste&height=391&id=u2b9b6822&name=image.png&originHeight=391&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=81057&status=done&style=none&taskId=u66058a25-3aa2-44b0-902d-ed31e36f4fd&title=&width=1908" alt="image.png"><br>调用真正的方法 doRegisterBeanDefinitions。<strong>（一般地，spring 真正的执行方法都是 do+xxx）</strong><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676816683629-36dd5c2a-45b6-4339-ac93-0649e4ce3480.png#averageHue=%235f5546&clientId=ue5a34100-0753-4&from=paste&height=649&id=udc3180c8&name=image.png&originHeight=649&originWidth=1605&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=90468&status=done&style=none&taskId=u536a2b1d-5801-4f08-93e4-248b7a13134&title=&width=1605" alt="image.png"><br>之后进入发现了 parseBeanDefinition，用来解析 BD。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676859729014-cf7f69bb-a935-4f2f-97e9-8127a15b6c4b.png#averageHue=%232d2c2b&clientId=uf848af8a-24c6-4&from=paste&height=1030&id=ufc57a617&name=image.png&originHeight=1030&originWidth=1925&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=219719&status=done&style=none&taskId=uf17c350b-43d8-428a-8e98-b2c3337722d&title=&width=1925" alt="image.png"><br>进入之后发现，它对里面的节点进行遍历，查看每一节点是否是自定义还是默认的，这里解析 context:property-placeholder 是自定义节点，进入 parseCustomElement 方法<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860338307-cdd2b80f-ae24-4b98-b39a-06470073206d.png#averageHue=%23302f2e&clientId=uf848af8a-24c6-4&from=paste&height=1036&id=ud4fde77a&name=image.png&originHeight=1036&originWidth=2097&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=199346&status=done&style=none&taskId=ua933ff80-1c4b-4afb-afeb-feed2c98f81&title=&width=2097" alt="image.png"><br>还是进入 parseCustomElement 方法<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860436414-a0234447-85cf-4611-bd85-912eb3975661.png#averageHue=%232c2c2b&clientId=uf848af8a-24c6-4&from=paste&height=285&id=u964a252e&name=image.png&originHeight=285&originWidth=1866&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=43835&status=done&style=none&taskId=udb94a1be-35ff-459d-8ab6-169740bc131&title=&width=1866" alt="image.png"><br>之后进入发现它获取节点元素对应的 NameSpaceUri，然后寻找她对应的处理器。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860570884-c5921d60-083f-41b6-abca-57c7ffa8a5d0.png#averageHue=%23302e2d&clientId=uf848af8a-24c6-4&from=paste&height=950&id=u8fd72664&name=image.png&originHeight=950&originWidth=2022&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=145743&status=done&style=none&taskId=u52f2b84f-6a6c-4cc3-a89c-e16bedb7f49&title=&width=2022" alt="image.png"><br>获取所有的 handleMappings，然后读取当前 uri 对应的 Namespacehandler 命名空间处理器。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676860828240-3f15190c-4131-4432-9d4a-f25b785356f6.png#averageHue=%235d7c57&clientId=uf848af8a-24c6-4&from=paste&height=1516&id=u25d3ddc8&name=image.png&originHeight=1516&originWidth=2560&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=429095&status=done&style=none&taskId=u6a51f1c3-bbdd-4522-a2bc-27ce568248a&title=&width=2560" alt="image.png"><br>之后对处理器实例化，并且初始化。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676812951947-c27fa9c8-1278-4338-8dff-167c7305a371.png#averageHue=%232e2e2d&clientId=u9ea2d4b5-5592-4&from=paste&height=993&id=u03dba4d9&name=image.png&originHeight=993&originWidth=2288&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=215318&status=done&style=none&taskId=uc10f7772-fa9d-48eb-a05c-cbf3b28ecdb&title=&width=2288" alt="image.png"><br>以上的时序图如下：<br><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1676865628577-c020e895-100e-45b0-a2ce-4c28a8f5bc49.jpeg#averageHue=%23f9f9f9&clientId=uf848af8a-24c6-4&from=paste&id=u1677af0f&name=%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.jpg&originHeight=623&originWidth=3660&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=172780&status=done&style=none&taskId=uefebf8cc-d490-483a-95d0-145f7056011&title=" alt="未命名文件.jpg"></p>
+<hr>
+<p><strong>从这里开始就是重要的内容，可以自行自定义元素解析器。</strong><br>进入处理器里面，可以看到它在初始化方法里面注册了每一种节点元素的解析器。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676812967620-ef716154-cf8f-4042-a615-c7ea9e2828f5.png#averageHue=%232f2f2e&clientId=u9ea2d4b5-5592-4&from=paste&height=812&id=u1a5c49e3&name=image.png&originHeight=812&originWidth=2127&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=169439&status=done&style=none&taskId=u150bd79d-93b6-413d-81d8-5fff4721834&title=&width=2127" alt="image.png"><br>接着 spring 帮你把解析器放到 parsers 中。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813038429-b70446d6-b0a7-422c-be56-64b33ca602bd.png#averageHue=%23302f2f&clientId=u9ea2d4b5-5592-4&from=paste&height=1183&id=ub7030e8d&name=image.png&originHeight=1183&originWidth=2448&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=218070&status=done&style=none&taskId=u06742102-2ce2-40b7-9886-7d8a706408a&title=&width=2448" alt="image.png"><br>之后返回可以看到调用了命名处理器的解析方法。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813094636-18c27ec6-db2b-4966-9397-50e86dbdc2f7.png#averageHue=%23625644&clientId=u9ea2d4b5-5592-4&from=paste&height=1164&id=u66e0d11d&name=image.png&originHeight=1164&originWidth=2434&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=265147&status=done&style=none&taskId=ue09455a9-08e6-4f4c-8849-28279b67fb3&title=&width=2434" alt="image.png"><br>之后就是查找对应的解析器，并且判断是否为空，不为空则直接调用对应命名空间处理器的解析器。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676813155960-fe15cef9-688f-438d-bf8f-8caf4ed55109.png#averageHue=%23302f2e&clientId=u9ea2d4b5-5592-4&from=paste&height=638&id=u6e5bc9eb&name=image.png&originHeight=638&originWidth=2131&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=109158&status=done&style=none&taskId=u04b5645d-e7ee-40d3-959c-672108d7e6d&title=&width=2131" alt="image.png"><br><strong>总的来说，这一命名空间处理器用来初始化所有对应元素的解析器，由 spring 创建的解析器代理进行调用对应的命名空间处理器里的解析器。</strong><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1676865930035-69e70cfd-cfb7-4361-8b4e-52505327a2c6.png#averageHue=%23f5f4f4&clientId=uf848af8a-24c6-4&from=paste&height=861&id=u7f0672ef&name=image.png&originHeight=861&originWidth=1115&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=19027&status=done&style=none&taskId=ufab72b21-3677-490b-8ddc-8e7669120fa&title=&width=1115" alt="image.png"></p>
+<hr>
+<p>本文可能对其他方法还未进行详细解释，将在以后继续完善本文。</p>
+
+    
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/19/yfpo0og6ok2vsrs8/" target="_blank">回顾Spring（七）从源码看解析自定义命名空间</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/19/yfpo0og6ok2vsrs8/" title="回顾Spring（七）从源码看解析自定义命名空间" target="_blank">http://wandefulha.github.io/2023/02/19/yfpo0og6ok2vsrs8/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
-          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
 
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/19/yfpo0og6ok2vsrs8/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/17/fudog92g0cogdtad/" class="archive-article-date">
-        <time datetime="2023-02-17T15:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-17</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/17/fudog92g0cogdtad/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾Spring（六）Spring与MyBatis整合</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/17/fudog92g0cogdtad/" target="_blank">回顾Spring（六）Spring与MyBatis整合</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/ryiz8eaa7ioxc6si/" class="archive-article-date">
-        <time datetime="2023-02-16T15:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/ryiz8eaa7ioxc6si/" target="_blank">回顾Spring（五）SpringBean生命周期</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/uikua1afpd7xlotn/" class="archive-article-date">
-        <time datetime="2023-02-16T07:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/uikua1afpd7xlotn/" target="_blank">回顾Spring（四）几张图搞懂BeanFactory处理器</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/hrruh1pv6cqwnzrw/" class="archive-article-date">
-        <time datetime="2023-02-16T03:54:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/hrruh1pv6cqwnzrw/" target="_blank">回顾Spring（三）xml配置bean</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/xll7xc2wan28yi4m/" class="archive-article-date">
-        <time datetime="2023-02-15T14:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/xll7xc2wan28yi4m/" target="_blank">回顾Spring（二）BeanFactory（IOC的工厂）</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/bhf8muquziq07qr7/" class="archive-article-date">
-        <time datetime="2023-02-15T10:22:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/bhf8muquziq07qr7/" target="_blank">回顾Spring（一）IOC、AOP、DI的思想</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/14/txsmnxirp2xodh52/" class="archive-article-date">
-        <time datetime="2023-02-14T10:59:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/14/txsmnxirp2xodh52/" target="_blank">GIT（四）在Idea中使用GIT</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2023/page/2/">2</a><a class="extend next" rel="next" href="/archives/2023/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -787,8 +724,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

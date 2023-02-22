@@ -204,21 +204,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>回顾数据库（一）事务 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/index.html">
+  <meta name="description" content="本文回顾数据库事务相关内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾数据库（一）事务">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/22/tt566p87nt38essh/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="本文回顾数据库事务相关内容">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1677075459163-351a6e96-7453-4db5-ae70-a7578c38d6dd.png#averageHue=%23edecec&clientId=uc7f1599d-84ce-4&from=paste&height=301&id=ud2b95c55&name=image.png&originHeight=527&originWidth=965&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=19205&status=done&style=none&taskId=u8ce12647-9f6a-4250-8192-f98b6e26fbb&title=&width=551.4285714285714">
+<meta property="article:published_time" content="2023-02-22T14:03:08.000Z">
+<meta property="article:modified_time" content="2023-02-22T14:44:41.491Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1677075459163-351a6e96-7453-4db5-ae70-a7578c38d6dd.png#averageHue=%23edecec&clientId=uc7f1599d-84ce-4&from=paste&height=301&id=ud2b95c55&name=image.png&originHeight=527&originWidth=965&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=19205&status=done&style=none&taskId=u8ce12647-9f6a-4250-8192-f98b6e26fbb&title=&width=551.4285714285714">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -411,25 +413,25 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-tt566p87nt38essh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-tt566p87nt38essh" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/22/tt566p87nt38essh/" target="_blank">回顾数据库（一）事务</a>
-  
+    <h1 class="article-title" itemprop="name">
+      回顾数据库（一）事务
     </h1>
   
 
 
   
   
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2023/02/22/tt566p87nt38essh/" class="archive-article-date">
         <time datetime="2023-02-22T14:03:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
 </a>
@@ -437,6 +439,27 @@
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">615字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -450,12 +473,73 @@
 
     
     <p>本文回顾数据库事务相关内容</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-事务概念以及-ACID-的概念"><a href="#1-事务概念以及-ACID-的概念" class="headerlink" title="1.事务概念以及 ACID 的概念"></a>1.事务概念以及 ACID 的概念</h1><p>事务：满足 ACID 特性的一组操作，可以通过 commit 提交一个事务，也可以使用 RollBack 进行回滚。<strong>换言之，把一组操作看成一个整体，若其中无误则可以直接提交事务，否则就回滚已做的操作。</strong><br>ACID 特性：原子性（Atomicity）,一致性(Consistency),隔离性（Isolation），持久性（Durability）。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1677075459163-351a6e96-7453-4db5-ae70-a7578c38d6dd.png#averageHue=%23edecec&clientId=uc7f1599d-84ce-4&from=paste&height=301&id=ud2b95c55&name=image.png&originHeight=527&originWidth=965&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=19205&status=done&style=none&taskId=u8ce12647-9f6a-4250-8192-f98b6e26fbb&title=&width=551.4285714285714" alt="image.png"></p>
+<hr>
+<h1 id="2-原子性"><a href="#2-原子性" class="headerlink" title="2.原子性"></a>2.原子性</h1><p>原子性：事务被视为不可分割的<strong>最小单元，</strong>事务的操作要么全成功接着提交，要么全失败接着回滚。回滚可以用回滚日志来实现，回滚日志记录着事务所执行的修改操作，在回滚时反向执行这些操作即可。</p>
+<h1 id="3-一致性"><a href="#3-一致性" class="headerlink" title="3.一致性"></a>3.一致性</h1><p>一致性：数据库在事务执行前后都保持一致性状态，在一致性状态下，所有事务对于一个数据的读取结果都是相同的。事务的执行不会导致数据之间的矛盾。<strong>换言之：必须遵守完整性约束，其包括数据关系的完整性和业务逻辑的完整性。</strong><br>例如：小明转账给小红 100 块<br>那么：这就是一个事务<br>事务里面的操作：小明余额-100 块 小红余额+100 块<br>如果这俩操作都同时进行这样就遵守了完整性，那么这就叫一致性。</p>
+<h1 id="4-隔离性"><a href="#4-隔离性" class="headerlink" title="4.隔离性"></a>4.隔离性</h1><p>隔离性：一个事务内部操作在最终提交之前，这些内部操作对于其他事务均是<strong>透明</strong>的。（计算机里面的透明是指隐藏了，别人看不到了）。</p>
+<h1 id="5-持久性"><a href="#5-持久性" class="headerlink" title="5.持久性"></a>5.持久性</h1><p>持久性：一旦事务提交，那么它所做的修改将会永远存在数据库中。即使系统发生崩溃，其结果也不会丢失。<strong>说白了就是把内存的东西存到硬盘。</strong></p>
+<hr>
+<h1 id="6-注意"><a href="#6-注意" class="headerlink" title="6.注意"></a>6.注意</h1><p>这些特性<strong>非平级</strong>关系。<br>只有满足一致性，事务的执行结果才是正确的。<br>非并发情况下，事务串行执行，隔离性就一定能够实现。那么此时只需满足原子性，就一定能满足一致性。<br>并发情况下，多个事务并行执行，那么此时要满足原子性与隔离性，才能满足一致性。<br>事务满足持久性是为了应对数据库崩溃的情况。</p>
+
     
-    <a class="article-more-a" href="/2023/02/22/tt566p87nt38essh/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/22/tt566p87nt38essh/" title="回顾数据库（一）事务" target="_blank">http://wandefulha.github.io/2023/02/22/tt566p87nt38essh/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +549,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/22/tt566p87nt38essh/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/22/tt566p87nt38essh/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/19/yfpo0og6ok2vsrs8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾Spring（七）从源码看解析自定义命名空间</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,756 +633,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-yfpo0og6ok2vsrs8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/19/yfpo0og6ok2vsrs8/" target="_blank">回顾Spring（七）从源码看解析自定义命名空间</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/19/yfpo0og6ok2vsrs8/" class="archive-article-date">
-        <time datetime="2023-02-19T08:58:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文将从 spring 源码看解析自定义命名空间。</p>
-    
-    <a class="article-more-a" href="/2023/02/19/yfpo0og6ok2vsrs8/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/19/yfpo0og6ok2vsrs8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BA%8B%E5%8A%A1%E6%A6%82%E5%BF%B5%E4%BB%A5%E5%8F%8A-ACID-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">1.事务概念以及 ACID 的概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">2.原子性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">3.一致性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">4.隔离性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E6%8C%81%E4%B9%85%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">5.持久性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E6%B3%A8%E6%84%8F"><span class="toc-number">6.</span> <span class="toc-text">6.注意</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-fudog92g0cogdtad" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/17/fudog92g0cogdtad/" target="_blank">回顾Spring（六）Spring与MyBatis整合</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2023/02/17/fudog92g0cogdtad/" class="archive-article-date">
-        <time datetime="2023-02-17T15:18:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-17</time>
-</a>
 
-  
-  
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
 
-    
 
-    
-    <p>本文将回顾 Spring 与 Mybatis 的整合及其实现源码。</p>
-    
-    <a class="article-more-a" href="/2023/02/17/fudog92g0cogdtad/#more">more >></a>
-    
-    
-    
 
-    
 
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/17/fudog92g0cogdtad/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ryiz8eaa7ioxc6si" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/16/ryiz8eaa7ioxc6si/" target="_blank">回顾Spring（五）SpringBean生命周期</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/16/ryiz8eaa7ioxc6si/" class="archive-article-date">
-        <time datetime="2023-02-16T15:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>SpringBean 的过程包含：Bean 实例化，属性填充，Aware 接口属性注入，BeanPostProcessor 的 before 回调，InitializingBean 接口的初始化方法回调(afterProperties)，init 方法，BeanPostProcessor 的 after 回调，存入 SingletonObjects，本文将对这几个阶段进行回顾。</p>
-    
-    <a class="article-more-a" href="/2023/02/16/ryiz8eaa7ioxc6si/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/16/ryiz8eaa7ioxc6si/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-uikua1afpd7xlotn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/16/uikua1afpd7xlotn/" target="_blank">回顾Spring（四）几张图搞懂BeanFactory处理器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/16/uikua1afpd7xlotn/" class="archive-article-date">
-        <time datetime="2023-02-16T07:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>回顾 BeanFactory 的处理器的相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/16/uikua1afpd7xlotn/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/16/uikua1afpd7xlotn/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hrruh1pv6cqwnzrw" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/16/hrruh1pv6cqwnzrw/" target="_blank">回顾Spring（三）xml配置bean</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/16/hrruh1pv6cqwnzrw/" class="archive-article-date">
-        <time datetime="2023-02-16T03:54:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>回顾 xml 配置 bean 的相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/16/hrruh1pv6cqwnzrw/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/16/hrruh1pv6cqwnzrw/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-xll7xc2wan28yi4m" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/15/xll7xc2wan28yi4m/" target="_blank">回顾Spring（二）BeanFactory（IOC的工厂）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/15/xll7xc2wan28yi4m/" class="archive-article-date">
-        <time datetime="2023-02-15T14:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>回顾 beanfactory 的相关内容，但是回顾前会先来个快速入门的 demo，方便讲解回顾。</p>
-    
-    <a class="article-more-a" href="/2023/02/15/xll7xc2wan28yi4m/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/15/xll7xc2wan28yi4m/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-bhf8muquziq07qr7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/15/bhf8muquziq07qr7/" target="_blank">回顾Spring（一）IOC、AOP、DI的思想</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/15/bhf8muquziq07qr7/" class="archive-article-date">
-        <time datetime="2023-02-15T10:22:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>今天开始，将回顾以前学过的 spring，这篇文章浅谈一下 IOC、AOP、DI 的思想。</p>
-    
-    <a class="article-more-a" href="/2023/02/15/bhf8muquziq07qr7/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/15/bhf8muquziq07qr7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-txsmnxirp2xodh52" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/14/txsmnxirp2xodh52/" target="_blank">GIT（四）在Idea中使用GIT</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/14/txsmnxirp2xodh52/" class="archive-article-date">
-        <time datetime="2023-02-14T10:59:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-14</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>平时我们敲代码都是在 IDE 里面的，而 idea 正是很多人所使用的 IDE，因为 IDE 集成了很多插件，包括数据库 GUI、GIT 等等，所以这里将用几张图展示在 Idea 中使用 GIT。</p>
-    
-    <a class="article-more-a" href="/2023/02/14/txsmnxirp2xodh52/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/14/txsmnxirp2xodh52/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ybkqmqhgsun69st5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文档将对所有的先前学过的 git 代码一一列举出来并简略总结用途。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -1278,8 +699,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

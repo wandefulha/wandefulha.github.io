@@ -204,19 +204,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>回顾数据库（三）三种模型 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/page/2/index.html">
+  <meta name="description" content="本文回顾三种模型相关内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾数据库（三）三种模型">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/22/psaxxgyhvq8cyh0u/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="本文回顾三种模型相关内容">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-22T14:54:37.000Z">
+<meta property="article:modified_time" content="2023-02-23T15:07:03.924Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
   
@@ -411,32 +411,53 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-ybkqmqhgsun69st5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-psaxxgyhvq8cyh0u" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
+    <h1 class="article-title" itemprop="name">
+      回顾数据库（三）三种模型
     </h1>
   
 
 
   
   
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/02/22/psaxxgyhvq8cyh0u/" class="archive-article-date">
+        <time datetime="2023-02-22T14:54:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">807字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -449,13 +470,140 @@
     
 
     
-    <p>本文档将对所有的先前学过的 git 代码一一列举出来并简略总结用途。</p>
+    <p>本文回顾三种模型相关内容</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-ER-图"><a href="#1-ER-图" class="headerlink" title="1.ER 图"></a>1.ER 图</h1><p>ER 图：Entity-Relationship 实体关系图，组成由三个部分：实体、属性、联系。用来进行关系型数据库系统的<strong>概念设计</strong>。<br>实体：用矩形表示，矩形方块内写实体名。<br>属性：用椭圆形表示，里面写属性名，并且用无箭头边与其实体互连。<br>联系：用菱形表示，菱形里面写联系名，并且用无箭头边与实体互连。<br>此外还应标明联系类型：1…1,1…n,n…m 即 一对一，一对多，多对多的关系</p>
+<hr>
+<p>ER 模型转换为<strong>关系模式（或者物理模型）</strong>的原则：<br>一对一：在两个实体任选一实体加入主键。<br>一对多：在多方实体加入另一方实体主键。<br>多对多：联系变实体，在实体加上另外两方实体的主键，再加上自身属性。<br><strong>其实，实际设计时，以上都可以把联系变成一个实体。</strong></p>
+<hr>
+<h1 id="2-关系模式"><a href="#2-关系模式" class="headerlink" title="2.关系模式"></a>2.关系模式</h1><p>上面提到关系模式：关系模式是对关系的描述。就是用一组符号描述它。可以表示为：R(U,D,dom，F），其中 R 为关系名，U 为属性名集合，D 为属性组 U 中属性来自的<strong>域</strong>，dom 为属性向域的映像集合，F 为属性间的依赖关系集合。<br>通常简化为：R（U）</p>
+<hr>
+<p>关系模型是数据模型，属于逻辑模型，实现信息世界到数字世界建模的。<br>关系模型中常用概念：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>定义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>域</td>
+<td>属性的取值范围，可以是整数或者字符等等</td>
+<td>D1&#x3D;{王八，老六}</td>
+</tr>
+<tr>
+<td>D2&#x3D;{男，女}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>笛卡尔积</td>
+<td>域的乘积。D1XD2XD3……</td>
+<td>D1XD2&#x3D; {王八，男}，{王八，女}，{老六，男}，{老六，女}</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>每一条记录，表中行</td>
+<td>-</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>表中列，字段</td>
+<td>-</td>
+</tr>
+<tr>
+<td>分量</td>
+<td>每条记录中的每一个值</td>
+<td>-</td>
+</tr>
+<tr>
+<td>基数</td>
+<td>元组的个数</td>
+<td>-</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>笛卡尔积中有意义的元组的集合，值的集合</td>
+<td>学生关系：{王八，女}，{老六，男}</td>
+</tr>
+<tr>
+<td>关系模式</td>
+<td>关系的结构，对关系的描述</td>
+<td>R(U) 学生（姓名，性别）</td>
+</tr>
+<tr>
+<td>目、度</td>
+<td>关系中属性的个数</td>
+<td>-</td>
+</tr>
+<tr>
+<td>候选码</td>
+<td>唯一标识每一条记录的属性（集合），可以有多个</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>判断方法：<br>属性集是否允许重复<br>是否允许为空 | - |<br>| 主码 | 选取其中一个候选码为主码 | - |<br>| 外码 | 外键，参照表参照被参照表，参照表需要有被参照表的主键 | - |<br>| 主属性 | 包含在任意一个候选码中的属性 | - |<br>| 非主属性 | 不包含在任意一个候选码中的属性 | - |<br>| 实体完整性 | 主键 not null | - |<br>| 参照完整性 | 外键为 null 或被参照表主码 | - |<br>| 用户自定义完整性 | 随便定 | - |</p>
+<hr>
+<h1 id="3-三种模型"><a href="#3-三种模型" class="headerlink" title="3.三种模型"></a>3.三种模型</h1><p>概念模型是现实到信息世界的抽象的模型。-&gt;ER 图<br>逻辑模型是实现信息世界到数字世界的建模，即选定管理系统所支持的数据模型（层次、关系、网状），将概念模型转为数据模型。-&gt;关系模型<br>物理模型是实现数据的具体存储，实实在在的表。</p>
+
     
-    <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/22/psaxxgyhvq8cyh0u/" title="回顾数据库（三）三种模型" target="_blank">http://wandefulha.github.io/2023/02/22/psaxxgyhvq8cyh0u/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +613,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/22/psaxxgyhvq8cyh0u/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/22/tt566p87nt38essh/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾数据库（一）事务</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,346 +697,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cdm3h3mnuczi0hk8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文档将实现 GIT 与远程仓库进行对接，从而将本地 GIT 仓库的分支与远程仓库的分支进行更新或修改，从而使得其他人可以协同开发等。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-ER-%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1.ER 图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">2.关系模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">3.三种模型</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-guwmxx84d22i7chm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/guwmxx84d22i7chm/" target="_blank">GIT（一）GIT的代码使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/guwmxx84d22i7chm/" class="archive-article-date">
-        <time datetime="2023-02-13T07:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>在上回了解了 GIT 的概念之后，本文档将对 git 常用指令进行解释与使用。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-ifsil6g4ngc6qf1o" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>很多人对 GIT 不了解，即使在大学里面听过一些教授的讲解，但是他们都没有讲解 GIT 是什么，为什么用 GIT，只是单纯扔个代码，做个实验，一节课就水过去了，所以本文档将对 GIT 进行初步的认识，不深入到 GIT 的使用和代码层面。</p>
-    
-    <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-mi0y1qt2a7v7ugu6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/11/mi0y1qt2a7v7ugu6/" target="_blank">hexo部署到github的实现过程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/11/mi0y1qt2a7v7ugu6/" class="archive-article-date">
-        <time datetime="2023-02-11T14:01:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>实现 hexo 与 github 的整合，将 hexo 静态页面博客部署到 github 中，从而通过 github 地址访问 hexo….</p>
-    
-    <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
 
 
           </div>
@@ -868,8 +763,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -204,19 +204,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>回顾数据库（四）索引 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/page/2/index.html">
+  <meta name="description" content="本文回顾索引（数据结构相关）相关内容（可以大致了解，无需深入）了解了解基本概念和种类即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回顾数据库（四）索引">
+<meta property="og:url" content="http://wandefulha.github.io/2023/02/25/vy41iigqvxgziw9l/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="本文回顾索引（数据结构相关）相关内容（可以大致了解，无需深入）了解了解基本概念和种类即可。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-25T14:02:35.000Z">
+<meta property="article:modified_time" content="2023-02-25T14:48:01.202Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
   
@@ -411,32 +411,53 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-bhf8muquziq07qr7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-vy41iigqvxgziw9l" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/15/bhf8muquziq07qr7/" target="_blank">回顾Spring（一）IOC、AOP、DI的思想</a>
-  
+    <h1 class="article-title" itemprop="name">
+      回顾数据库（四）索引
     </h1>
   
 
 
   
   
-<a href="/2023/02/15/bhf8muquziq07qr7/" class="archive-article-date">
-        <time datetime="2023-02-15T10:22:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/02/25/vy41iigqvxgziw9l/" class="archive-article-date">
+        <time datetime="2023-02-25T14:02:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-25</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">674字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -449,13 +470,76 @@
     
 
     
-    <p>今天开始，将回顾以前学过的 spring，这篇文章浅谈一下 IOC、AOP、DI 的思想。</p>
+    <p>本文回顾索引（数据结构相关）相关内容（可以大致了解，无需深入）<br>了解了解基本概念和种类即可。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-索引的数据结构"><a href="#1-索引的数据结构" class="headerlink" title="1.索引的数据结构"></a>1.索引的数据结构</h1><p>BTree（平衡树，Balance Tree，这是王道资料给出的名称解释），它的所有叶子节点位于同一层。<strong>（见缝插针）</strong></p>
+<p>B+Tree：不仅具有 BTree 的平衡性，并且可以通过<strong>顺序访问指针</strong>来提高<strong>区间查询</strong>的性能。<strong>（见缝插针+1，就是几个关键字对应几个下一结点的指针）</strong></p>
+<p>在 B+Tree 中，一个节点中的 key<strong>从左到右非递减排列（B 树也如此）</strong>，若某个指针的 keyi 左右相邻分别是 keyi-1 和 keyi+1，且不为 null，则该指针指向节点的所有 key 满足 keyi-1&lt;&#x3D;keyi&lt;&#x3D;keyi+1。</p>
+<p>两者最大区别：<strong>B+Tree 的非叶子结点不保存数据，只用于索引，所有数据都保存在叶子结点中。而且叶子结点间按照从小到大顺序链接起来。</strong></p>
+<p>BTree 与 B+Tree 的增删改查：<br>查找操作：<strong>递归二分查找到对应的 key，找出对应的 data。</strong><br>二分查找要求表有序，正好 BTree 和 B+Tree 结点中的 Key 从左到右非递减有序排列。<br>增删操作：破坏平衡性，需要分裂合并等操作。</p>
+<p>MySQL 索引<br>索引，在 MySQL 也称为键（key），是存储引擎为了快速找到记录的一种数据结构。相当于图书目录，根据目录中的页码快速找到所需的内容。</p>
+<h1 id="2-索引的结构类型"><a href="#2-索引的结构类型" class="headerlink" title="2.索引的结构类型"></a>2.索引的结构类型</h1><h2 id="（1）B-Tree-索引"><a href="#（1）B-Tree-索引" class="headerlink" title="（1）B+Tree 索引"></a>（1）B+Tree 索引</h2><p>B+Tree 索引是大多数 MySQL 存储引擎的默认索引类型。<br>因为 B+Tree 的有序性，因此可用于部分查找、范围查找、排序和分组。<br>适用于全键值、键值范围和键前缀查找（最左前缀查找）。若不是按索引列的顺序查找，则无法使用索引。</p>
+<h2 id="（2）Hash-索引"><a href="#（2）Hash-索引" class="headerlink" title="（2）Hash 索引"></a>（2）Hash 索引</h2><p>Hash 索引能以 O（1）时间进行查找，但是失去了有序性，因此无法用于排序与分组，无法部分查找和范围查找，只能精确查找。<br>Hash 仅满足&#x3D;，in，&lt;&#x3D;&gt;查询，不能使用范围查找，因为 Hash 是运算后的精确值。</p>
+<h2 id="（3）全文索引"><a href="#（3）全文索引" class="headerlink" title="（3）全文索引"></a>（3）全文索引</h2><p>全文索引使用倒排索引实现，它记录着关键词到其所在文档的映射。</p>
+<h2 id="（3）空间数据索引"><a href="#（3）空间数据索引" class="headerlink" title="（3）空间数据索引"></a>（3）空间数据索引</h2><p>空间数据索引会从所有维度来索引数据，可以有效地使用任意维度来进行组合查询。<br>必须使用 GIS 相关的函数来维护数据。</p>
+
     
-    <a class="article-more-a" href="/2023/02/15/bhf8muquziq07qr7/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/02/25/vy41iigqvxgziw9l/" title="回顾数据库（四）索引" target="_blank">http://wandefulha.github.io/2023/02/25/vy41iigqvxgziw9l/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +549,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/15/bhf8muquziq07qr7/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/02/25/vy41iigqvxgziw9l/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/24/xagrbg3wqqq3p0gy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾数据库（二）并发一致性以及封锁粒度</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,510 +633,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-txsmnxirp2xodh52" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/14/txsmnxirp2xodh52/" target="_blank">GIT（四）在Idea中使用GIT</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/14/txsmnxirp2xodh52/" class="archive-article-date">
-        <time datetime="2023-02-14T10:59:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-14</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>平时我们敲代码都是在 IDE 里面的，而 idea 正是很多人所使用的 IDE，因为 IDE 集成了很多插件，包括数据库 GUI、GIT 等等，所以这里将用几张图展示在 Idea 中使用 GIT。</p>
-    
-    <a class="article-more-a" href="/2023/02/14/txsmnxirp2xodh52/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/14/txsmnxirp2xodh52/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%B4%A2%E5%BC%95%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">1.索引的数据结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%B4%A2%E5%BC%95%E7%9A%84%E7%BB%93%E6%9E%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">2.索引的结构类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%881%EF%BC%89B-Tree-%E7%B4%A2%E5%BC%95"><span class="toc-number">2.1.</span> <span class="toc-text">（1）B+Tree 索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%882%EF%BC%89Hash-%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.</span> <span class="toc-text">（2）Hash 索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="toc-number">2.3.</span> <span class="toc-text">（3）全文索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95"><span class="toc-number">2.4.</span> <span class="toc-text">（3）空间数据索引</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-ybkqmqhgsun69st5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
 
-  
-  
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
 
-    
 
-    
-    <p>本文档将对所有的先前学过的 git 代码一一列举出来并简略总结用途。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/#more">more >></a>
-    
-    
-    
 
-    
 
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cdm3h3mnuczi0hk8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文档将实现 GIT 与远程仓库进行对接，从而将本地 GIT 仓库的分支与远程仓库的分支进行更新或修改，从而使得其他人可以协同开发等。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-guwmxx84d22i7chm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/guwmxx84d22i7chm/" target="_blank">GIT（一）GIT的代码使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/guwmxx84d22i7chm/" class="archive-article-date">
-        <time datetime="2023-02-13T07:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>在上回了解了 GIT 的概念之后，本文档将对 git 常用指令进行解释与使用。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ifsil6g4ngc6qf1o" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>很多人对 GIT 不了解，即使在大学里面听过一些教授的讲解，但是他们都没有讲解 GIT 是什么，为什么用 GIT，只是单纯扔个代码，做个实验，一节课就水过去了，所以本文档将对 GIT 进行初步的认识，不深入到 GIT 的使用和代码层面。</p>
-    
-    <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mi0y1qt2a7v7ugu6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/11/mi0y1qt2a7v7ugu6/" target="_blank">hexo部署到github的实现过程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/11/mi0y1qt2a7v7ugu6/" class="archive-article-date">
-        <time datetime="2023-02-11T14:01:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>实现 hexo 与 github 的整合，将 hexo 静态页面博客部署到 github 中，从而通过 github 地址访问 hexo….</p>
-    
-    <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
 
 
           </div>
@@ -1032,8 +699,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

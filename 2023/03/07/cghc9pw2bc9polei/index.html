@@ -204,15 +204,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>Archives | 钟学炫个人博客</title>
+  <title>C语言（一）结构体的内存计算 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/archives/page/2/index.html">
+  <meta name="description" content="在我大一的时候，就有了 C 语言这门必修课，但是我的老师也仅仅是讲了个概念上的东西。尤其是在结构体上，从没有真正的带我们入门结构体，所以我现在学会了，就来博客分享结构体的内存计算。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言（一）结构体的内存计算">
+<meta property="og:url" content="http://wandefulha.github.io/2023/03/07/cghc9pw2bc9polei/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="在我大一的时候，就有了 C 语言这门必修课，但是我的老师也仅仅是讲了个概念上的东西。尤其是在结构体上，从没有真正的带我们入门结构体，所以我现在学会了，就来博客分享结构体的内存计算。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-07T13:56:50.000Z">
+<meta property="article:modified_time" content="2023-03-07T14:38:15.651Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
   
@@ -407,346 +411,275 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-cghc9pw2bc9polei" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/ryiz8eaa7ioxc6si/" class="archive-article-date">
-        <time datetime="2023-02-16T15:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/ryiz8eaa7ioxc6si/" target="_blank">回顾Spring（五）SpringBean生命周期</a>
   
+    <h1 class="article-title" itemprop="name">
+      C语言（一）结构体的内存计算
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/uikua1afpd7xlotn/" class="archive-article-date">
-        <time datetime="2023-02-16T07:39:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/03/07/cghc9pw2bc9polei/" class="archive-article-date">
+        <time datetime="2023-03-07T13:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-07</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+    <p>在我大一的时候，就有了 C 语言这门必修课，但是我的老师也仅仅是讲了个概念上的东西。尤其是在结构体上，从没有真正的带我们入门结构体，所以我现在学会了，就来博客分享结构体的内存计算。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-结构体的定义及其内存存储规则"><a href="#1-结构体的定义及其内存存储规则" class="headerlink" title="1.结构体的定义及其内存存储规则"></a>1.结构体的定义及其内存存储规则</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">tagTest3</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">short</span> c; <span class="comment">//2</span></span><br><span class="line">    <span class="type">long</span> b;  <span class="comment">//8</span></span><br><span class="line">    <span class="type">char</span> d;  <span class="comment">//9</span></span><br><span class="line">    <span class="type">char</span> a;  <span class="comment">//10</span></span><br><span class="line">  &#125;;stu;</span><br><span class="line"><span class="comment">//stu其实就是将这个结构体实例化，就是结构体本身是一个抽象的类型，现在直接给它具体化，可以用来存东西</span></span><br><span class="line"><span class="comment">//stu相当于 int a 中的a</span></span><br></pre></td></tr></table></figure>
+
+<p>1.以上就是结构体的定义，大概就是这样<br>struct 结构体的名称 {<br>数据集合;<br>}[变量名称];<br>[]代表这里面的内容可有可无。 2.结构体存储规则</p>
+<ol>
+<li>无论结构体的首地址在哪里，只要是在内部计算时，都视为<strong>从 0 开始</strong>。</li>
+<li>首个数据直接放到 0 开始的位置之后的位置</li>
+</ol>
+<blockquote>
+<p>例如 上面的 short 占用 2 个字节;<br>那么 就是 0 地址后面占用了两个地址;<strong>（按字节编地址)</strong> &gt; <strong>那么 下一个数据就从 2 开始按规则存储;</strong></p>
+</blockquote>
+<ol start="3">
+<li>第二个元素开始的内存存储必须要计算存储的位置，即 <strong>选择合适的地址存储</strong><br><strong>选择的规则如下：</strong><br><strong>将类型的占用字节数与编译器设定的字节数相比，（vs 中，4 为设定的字节数，gcc 无对齐数）</strong><br><strong>取较小者作为临时值，</strong><br><strong>寻找能被这一临时值整除的内存地址（这一内存地址一定是上一内存地址末尾接下去的部分）。</strong><br><strong>重复执行，直到所有数据都存完。</strong></li>
+</ol>
+<blockquote>
+<p>例如 上面的 long 类型为 4 字节；<br>而 short 后的内存地址为 2，不能被 4 整除；<br>那么就找到内存地址为 4 开始存储 4 字节；<br>那么下一个就从 8 开始存储。</p>
+</blockquote>
+<ol start="4">
+<li>最后，看所占的内存字节数，将其与数据类型的最大占有字节数相除。<br>若为 0，则不用扩增；<br>否则，需要将其扩增到 可以与数据类型的最大占有字节数相除 等于 0 为止；<br>此时，当前所占内存字节数即为结构体的内存所占空间。</li>
+</ol>
+<blockquote>
+<p>例如 上面的最后数据占用后为 10 字节<br>而在这一结构体里面，最大的数据类型占用为 long，占用 4 个字节。<br>而 10&#x2F;4！&#x3D;0，那么就扩增到 12，这时 12&#x2F;4&#x3D;&#x3D;0，则 12 字节为最终的占用空间。</p>
+</blockquote>
+<h1 id="2-举例说明"><a href="#2-举例说明" class="headerlink" title="2.举例说明"></a>2.举例说明</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">tagTest1</span></span><br><span class="line"> &#123;</span><br><span class="line">   <span class="type">short</span> a; <span class="comment">//2</span></span><br><span class="line">   <span class="type">char</span> d; <span class="comment">//3</span></span><br><span class="line">   <span class="type">long</span> b; <span class="comment">//8</span></span><br><span class="line">   <span class="type">long</span> c; <span class="comment">//12</span></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子：<br>1.0 开始 short 占用 2 字节 0+2&#x3D;2；<br>2.2 开始 char 占用 1 字节 2&#x2F;1&#x3D;&#x3D;0, 那么 2+1&#x3D;3;<br>3.3 开始 long 占用 4 字节 3&#x2F;4!&#x3D;0，那么就从 4 开始，4+4&#x3D;8;<br>4.8 开始 long 占用 4 字节 8&#x2F;4&#x3D;&#x3D;0,8+4&#x3D;12; 5.最后，这所有数据占用 12 个字节，而这里面的最大类型为 long，占用 4 个字节，刚好 12&#x2F;4&#x3D;&#x3D;0，那么 12 就是最终的内存占用字节数。</p>
+<hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</span><br><span class="line">  <span class="type">int</span> a; <span class="comment">//4</span></span><br><span class="line">  <span class="type">char</span> b; <span class="comment">//5</span></span><br><span class="line">  <span class="type">short</span> c; <span class="comment">//8</span></span><br><span class="line">  <span class="type">short</span> d; <span class="comment">//10</span></span><br><span class="line">&#125;AA_t;</span><br></pre></td></tr></table></figure>
+
+<p>1.0 开始 int 占用 4 字节 0+4&#x3D;4；<br>2.4 开始 char 占用 1 字节 4&#x2F;1&#x3D;&#x3D;0, 那么 4+1&#x3D;5;<br>3.5 开始 short 占用 2 字节 5&#x2F;4!&#x3D;0，那么就从 6 开始，6+2&#x3D;8;<br>4.8 开始 short 占用 2 字节 8&#x2F;2&#x3D;&#x3D;0,8+2&#x3D;10; 5.最后，这所有数据占用 10 个字节，而这里面的最大类型为 int，占用 4 个字节，而 10&#x2F;4！&#x3D;0，那么就扩增到 12，12 就是最终的内存占用字节数。</p>
+<h1 id="3-规则设定的原因"><a href="#3-规则设定的原因" class="headerlink" title="3.规则设定的原因"></a>3.规则设定的原因</h1><p>在计算机组成原理中，我们知道 32 位计算机每次读取数据为 4B，那么我们在内存存储一定要合理的使用，使得每次读取数据的次数都要最少，那么我们就得遵循一定的<strong>内存对齐原则（这一原则其实就可以理解为上面的结构体原则)<strong>，浪费一些空间，从而减少时间。这就是典型的</strong>以空间换时间</strong>。</p>
+
+    
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/uikua1afpd7xlotn/" target="_blank">回顾Spring（四）几张图搞懂BeanFactory处理器</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/03/07/cghc9pw2bc9polei/" title="C语言（一）结构体的内存计算" target="_blank">http://wandefulha.github.io/2023/03/07/cghc9pw2bc9polei/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
-          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
 
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/03/07/cghc9pw2bc9polei/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/16/hrruh1pv6cqwnzrw/" class="archive-article-date">
-        <time datetime="2023-02-16T03:54:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-16</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/26/sxxt0qp48bqz5nwu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回顾编程语言（二）Java基本概念</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/16/hrruh1pv6cqwnzrw/" target="_blank">回顾Spring（三）xml配置bean</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E5%85%B6%E5%86%85%E5%AD%98%E5%AD%98%E5%82%A8%E8%A7%84%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">1.结构体的定义及其内存存储规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">2.举例说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%A7%84%E5%88%99%E8%AE%BE%E5%AE%9A%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">3.</span> <span class="toc-text">3.规则设定的原因</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/xll7xc2wan28yi4m/" class="archive-article-date">
-        <time datetime="2023-02-15T14:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/xll7xc2wan28yi4m/" target="_blank">回顾Spring（二）BeanFactory（IOC的工厂）</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/15/bhf8muquziq07qr7/" class="archive-article-date">
-        <time datetime="2023-02-15T10:22:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/15/bhf8muquziq07qr7/" target="_blank">回顾Spring（一）IOC、AOP、DI的思想</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/14/txsmnxirp2xodh52/" class="archive-article-date">
-        <time datetime="2023-02-14T10:59:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/14/txsmnxirp2xodh52/" target="_blank">GIT（四）在Idea中使用GIT</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/13/guwmxx84d22i7chm/" class="archive-article-date">
-        <time datetime="2023-02-13T07:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/13/guwmxx84d22i7chm/" target="_blank">GIT（一）GIT的代码使用</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -787,8 +720,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

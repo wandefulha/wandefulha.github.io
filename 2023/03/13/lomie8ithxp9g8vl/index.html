@@ -204,21 +204,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>机器学习--线性模型(线性回归) | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/index.html">
+  <meta name="description" content="机器学习–线性模型(线性回归)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习--线性模型(线性回归)">
+<meta property="og:url" content="http://wandefulha.github.io/2023/03/13/lomie8ithxp9g8vl/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="机器学习–线性模型(线性回归)">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678721431881-01bb1529-94d3-4b15-ac98-147e82cc91ab.png#averageHue=%23f9f8f8&clientId=u166967a3-bfb7-4&from=paste&height=258&id=u59746426&name=d49af96bfa0542e3310c9b25bbabc40e_watermark%2Cimage_d2F0ZXIvYmFpa2U5Mg%3D%3D%2Cg_7%2Cxp_5%2Cyp_5.png&originHeight=451&originWidth=724&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=95851&status=done&style=none&taskId=u9bb5f6fb-b28e-4609-bf40-8cf4710a038&title=&width=413.7142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/aeb80cad1bf6ddb78bc38d31c46a3943.svg#card=math&code=w_1x_1%2Bw_2x_2%2Bw_3x_3%2B%E2%80%A6%E2%80%A6%2Bw_dx_d%2Bb&id=KPOD7">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/cb83f302ab319745e11e27aad9737944.svg#card=math&code=w%5E%7Bt%7Dx%2Bb&id=oi83F">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/4d2a6df4940a14a4cb2c66089ea44bb2.svg#card=math&code=w_t%3D%5C%7Bw_1%20w_2%20w_3%E2%80%A6%E2%80%A6w_d%5C%7D%2Cw_t&id=dEyw2">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/f7f0ac7863a79a5a27d8b3969bcea567.svg#card=math&code=x%3D%5C%7Bx_1%20x_2%20x_3%E2%80%A6%E2%80%A6x_d%5C%7D%2Cx&id=ZlhCR">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/f4ab00c92f51f92ce6a0bcf3d4ce0fea.svg#card=math&code=x_d&id=M9Bwy">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/cc3210d4e36181fbf380a9e9e5da1c3c.svg#card=math&code=%28w%5E%2A%2Cb%5E%2A%29%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28f%28x_i%29-y_i%29%5E2%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28w%5E%7Bt%7Dx%2Bb-y_i%29%5E2&id=UUdRq">
+<meta property="article:published_time" content="2023-03-13T14:25:42.000Z">
+<meta property="article:modified_time" content="2023-03-13T15:32:00.687Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678721431881-01bb1529-94d3-4b15-ac98-147e82cc91ab.png#averageHue=%23f9f8f8&clientId=u166967a3-bfb7-4&from=paste&height=258&id=u59746426&name=d49af96bfa0542e3310c9b25bbabc40e_watermark%2Cimage_d2F0ZXIvYmFpa2U5Mg%3D%3D%2Cg_7%2Cxp_5%2Cyp_5.png&originHeight=451&originWidth=724&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=95851&status=done&style=none&taskId=u9bb5f6fb-b28e-4609-bf40-8cf4710a038&title=&width=413.7142857142857">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -411,25 +419,25 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-lomie8ithxp9g8vl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-lomie8ithxp9g8vl" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/03/13/lomie8ithxp9g8vl/" target="_blank">机器学习--线性模型(线性回归)</a>
-  
+    <h1 class="article-title" itemprop="name">
+      机器学习--线性模型(线性回归)
     </h1>
   
 
 
   
   
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2023/03/13/lomie8ithxp9g8vl/" class="archive-article-date">
         <time datetime="2023-03-13T14:25:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-13</time>
 </a>
@@ -437,6 +445,27 @@
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">898字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -450,12 +479,85 @@
 
     
     <p>机器学习–线性模型(线性回归)</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-机器学习的定义"><a href="#1-机器学习的定义" class="headerlink" title="1.机器学习的定义"></a>1.机器学习的定义</h1><p>个人理解：<br>机器学习就是给定一个合理的模型，例如像如下的线性模型（<strong>一开始 w 和 b 参数是未知的</strong>），然后给一堆正确 的数据（<strong>训练集</strong>）进行训练（训练也就是找出<strong>合适的 w 和 b</strong>）。<br>这上面已经是<strong>对机器学习的基本理解</strong>，如果要继续扩展，如下：</p>
+<hr>
+<p>接着就可以用这个机器学习后的<strong>模型</strong>去正确的数据进行验证（<strong>验证集）</strong>，查看该模型是否过度符合<strong>训练集</strong>而不适合对未知的值**(说白了就是：我做某项作业套某模板可以得高分，然后遇到考试题目我就得低分；这有个专业名叫 过拟合：在训练集表现优秀，在测试集或验证集表现很垃圾；欠拟合：在训练集和测试集或验证集表现都很垃圾；此外，用了进行验证的未知的值称为验证集）,**如果过拟合则重新调整模型，如果欠拟合也得重新调整。</p>
+<hr>
+<p>数据集（data set）：顾名思义 数据集合，以下都为数据集<br>训练集（train set）：用来训练模型的数据集合（它包含了正确答案）称为训练集。<br>验证集（validation set）：在训练集中分出来验证模型的数据集合。<br>测试集（test set）：可以等同于验证集。<br>欠拟合（overfitting）：模型在训练集和 验证集或测试集 表现垃圾。<br>过拟合（underfitting）：模型在训练集表现完美，验证集或测试集 垃圾。</p>
+<h1 id="2-概念"><a href="#2-概念" class="headerlink" title="2.概念"></a>2.概念</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678721431881-01bb1529-94d3-4b15-ac98-147e82cc91ab.png#averageHue=%23f9f8f8&clientId=u166967a3-bfb7-4&from=paste&height=258&id=u59746426&name=d49af96bfa0542e3310c9b25bbabc40e_watermark%2Cimage_d2F0ZXIvYmFpa2U5Mg%3D%3D%2Cg_7%2Cxp_5%2Cyp_5.png&originHeight=451&originWidth=724&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=95851&status=done&style=none&taskId=u9bb5f6fb-b28e-4609-bf40-8cf4710a038&title=&width=413.7142857142857" alt="d49af96bfa0542e3310c9b25bbabc40e_watermark,image_d2F0ZXIvYmFpa2U5Mg==,g_7,xp_5,yp_5.png"><br>形如<br>f(x)&#x3D;<img src="https://cdn.nlark.com/yuque/__latex/aeb80cad1bf6ddb78bc38d31c46a3943.svg#card=math&code=w_1x_1%2Bw_2x_2%2Bw_3x_3%2B%E2%80%A6%E2%80%A6%2Bw_dx_d%2Bb&id=KPOD7"><br>或者<br>f(x)&#x3D;<img src="https://cdn.nlark.com/yuque/__latex/cb83f302ab319745e11e27aad9737944.svg#card=math&code=w%5E%7Bt%7Dx%2Bb&id=oi83F"><br>则称这些<strong>线性组合</strong>的函数为<strong>线性模型（linear model)</strong></p>
+<blockquote>
+<p>符号解释：f(x)表示一个模型<br>上述函数中，<img src="https://cdn.nlark.com/yuque/__latex/4d2a6df4940a14a4cb2c66089ea44bb2.svg#card=math&code=w_t%3D%5C%7Bw_1%20w_2%20w_3%E2%80%A6%E2%80%A6w_d%5C%7D%2Cw_t&id=dEyw2">表示该模型经过学习后得到的值，它是一个向量（可以说是一个权重集合）。<br>b 也是该模型经过学习后得到的值（b 是 biased，偏差，就是用来上下调整模型的位置的一个常数）。<br><img src="https://cdn.nlark.com/yuque/__latex/f7f0ac7863a79a5a27d8b3969bcea567.svg#card=math&code=x%3D%5C%7Bx_1%20x_2%20x_3%E2%80%A6%E2%80%A6x_d%5C%7D%2Cx&id=ZlhCR">表示<strong>属性特征（feature）</strong>，<img src="https://cdn.nlark.com/yuque/__latex/f4ab00c92f51f92ce6a0bcf3d4ce0fea.svg#card=math&code=x_d&id=M9Bwy">表示属性向量中第 d 个属性的取值。</p>
+</blockquote>
+<hr>
+<p>这里先引入几个概念：<br>回归（regression）：模型输出为<strong>连续的</strong>值。<br>例如 y&#x3D;10x+1 ,这样的函数输出就是连续的数字。<br>分类（classification）：模型输出**离散的(discrete)**类别。<br>例如 我输入模型一个西瓜的属性特征，他告诉我这个瓜是好的 还是 坏的 。</p>
+<hr>
+<h1 id="3-线性回归"><a href="#3-线性回归" class="headerlink" title="3.线性回归"></a>3.线性回归</h1><p>学习上述线性模型，输入数据后，利用模型，输出<strong>连续的值</strong>，这就是线性回归。<br>那么线性回归学习线性模型的 w 和 b 的过程中，我们要怎么让模型自动调整 w 和 b 呢？<br>当然是通过一个函数（性能度量）告诉这个模型：<strong>当前的 w 和 b 的好坏</strong>。</p>
+<hr>
+<h1 id="4-损失函数–均方误差"><a href="#4-损失函数–均方误差" class="headerlink" title="4.损失函数–均方误差"></a>4.损失函数–均方误差</h1><p>形如<br><img src="https://cdn.nlark.com/yuque/__latex/cc3210d4e36181fbf380a9e9e5da1c3c.svg#card=math&code=%28w%5E%2A%2Cb%5E%2A%29%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28f%28x_i%29-y_i%29%5E2%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28w%5E%7Bt%7Dx%2Bb-y_i%29%5E2&id=UUdRq"><br>这样的函数成为<strong>均方误差</strong>，也称<strong>平方损失（square loss）。该函数来源极大似然估计法（以后的文章会介绍）。</strong><br><strong>基于均方误差最小化来进行模型求解的方法称为 最小二乘法</strong></p>
+<blockquote>
+<p>w<em>，b</em>是 w 和 b 的某一时刻的值。<br>argmin 意思就是 argument minimum 参数最小化，即通过调整 w，b 参数，使得均方误差最小化。</p>
+</blockquote>
+<hr>
+<p>后续的文章将介绍梯度下降，使得损失函数（代价函数）一直往最优的方向选择 w 和 b。</p>
+
     
-    <a class="article-more-a" href="/2023/03/13/lomie8ithxp9g8vl/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/03/13/lomie8ithxp9g8vl/" title="机器学习--线性模型(线性回归)" target="_blank">http://wandefulha.github.io/2023/03/13/lomie8ithxp9g8vl/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +567,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/03/13/lomie8ithxp9g8vl/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/03/13/lomie8ithxp9g8vl/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/10/gcyiegzv9wdapyvg/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">协同过滤算法的初步认识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,756 +651,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gcyiegzv9wdapyvg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/03/10/gcyiegzv9wdapyvg/" target="_blank">协同过滤算法的初步认识</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/03/10/gcyiegzv9wdapyvg/" class="archive-article-date">
-        <time datetime="2023-03-10T07:54:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>在我的毕业设计里，我运用了推荐系统里面的协同过滤算法，所以此文章用来记录我对协同过滤算法的认识内容。</p>
-    
-    <a class="article-more-a" href="/2023/03/10/gcyiegzv9wdapyvg/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/03/10/gcyiegzv9wdapyvg/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">1.机器学习的定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">2.概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">3.</span> <span class="toc-text">3.线性回归</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E2%80%93%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE"><span class="toc-number">4.</span> <span class="toc-text">4.损失函数–均方误差</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-cghc9pw2bc9polei" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/03/07/cghc9pw2bc9polei/" target="_blank">C语言（一）结构体的内存计算</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2023/03/07/cghc9pw2bc9polei/" class="archive-article-date">
-        <time datetime="2023-03-07T13:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-07</time>
-</a>
 
-  
-  
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
 
-    
 
-    
-    <p>在我大一的时候，就有了 C 语言这门必修课，但是我的老师也仅仅是讲了个概念上的东西。尤其是在结构体上，从没有真正的带我们入门结构体，所以我现在学会了，就来博客分享结构体的内存计算。</p>
-    
-    <a class="article-more-a" href="/2023/03/07/cghc9pw2bc9polei/#more">more >></a>
-    
-    
-    
 
-    
 
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/03/07/cghc9pw2bc9polei/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sxxt0qp48bqz5nwu" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/26/sxxt0qp48bqz5nwu/" target="_blank">回顾编程语言（二）Java基本概念</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/26/sxxt0qp48bqz5nwu/" class="archive-article-date">
-        <time datetime="2023-02-26T12:28:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾 Java 基本概念，Java 继承了 C++许多优势部分。</p>
-    
-    <a class="article-more-a" href="/2023/02/26/sxxt0qp48bqz5nwu/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/26/sxxt0qp48bqz5nwu/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-yzie30aez53w2g8x" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/26/yzie30aez53w2g8x/" target="_blank">回顾编程语言（一）C/C++基本概念</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/26/yzie30aez53w2g8x/" class="archive-article-date">
-        <time datetime="2023-02-26T06:02:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾 C&#x2F;C++基本概念</p>
-    
-    <a class="article-more-a" href="/2023/02/26/yzie30aez53w2g8x/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/26/yzie30aez53w2g8x/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ngba1vwf88uenexg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/26/ngba1vwf88uenexg/" target="_blank">回顾数据库（五）关系数据库设计理论</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/26/ngba1vwf88uenexg/" class="archive-article-date">
-        <time datetime="2023-02-26T05:22:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾关系数据库设计理论相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/26/ngba1vwf88uenexg/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/26/ngba1vwf88uenexg/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vy41iigqvxgziw9l" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/25/vy41iigqvxgziw9l/" target="_blank">回顾数据库（四）索引</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/25/vy41iigqvxgziw9l/" class="archive-article-date">
-        <time datetime="2023-02-25T14:02:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾索引（数据结构相关）相关内容（可以大致了解，无需深入）<br>了解了解基本概念和种类即可。</p>
-    
-    <a class="article-more-a" href="/2023/02/25/vy41iigqvxgziw9l/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/25/vy41iigqvxgziw9l/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-xagrbg3wqqq3p0gy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/24/xagrbg3wqqq3p0gy/" target="_blank">回顾数据库（二）并发一致性以及封锁粒度</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/24/xagrbg3wqqq3p0gy/" class="archive-article-date">
-        <time datetime="2023-02-24T13:22:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾并发一致性以及封锁粒度相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/24/xagrbg3wqqq3p0gy/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/24/xagrbg3wqqq3p0gy/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-psaxxgyhvq8cyh0u" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/22/psaxxgyhvq8cyh0u/" target="_blank">回顾数据库（三）三种模型</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/22/psaxxgyhvq8cyh0u/" class="archive-article-date">
-        <time datetime="2023-02-22T14:54:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾三种模型相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/22/psaxxgyhvq8cyh0u/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/22/psaxxgyhvq8cyh0u/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-tt566p87nt38essh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/22/tt566p87nt38essh/" target="_blank">回顾数据库（一）事务</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/22/tt566p87nt38essh/" class="archive-article-date">
-        <time datetime="2023-02-22T14:03:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文回顾数据库事务相关内容</p>
-    
-    <a class="article-more-a" href="/2023/02/22/tt566p87nt38essh/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/22/tt566p87nt38essh/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -1278,8 +717,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -204,17 +204,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>Archives | 钟学炫个人博客</title>
+  <title>机器学习--梯度下降 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/archives/index.html">
+  <meta name="description" content="机器学习–梯度下降">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习--梯度下降">
+<meta property="og:url" content="http://wandefulha.github.io/2023/03/13/og367rd219bd00em/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="机器学习–梯度下降">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/42b9ca7f2d288759b2f65bda2eebf946.svg#card=math&code=%E5%9D%87%E6%96%B9%E5%B7%AE%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%28w%5E%2A%2Cb%5E%2A%29%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28f%28x_i%29-y_i%29%5E2%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29%5E2%0A&id=UUdRq">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/6df7b92cda4fdd0a6cec5a6e2c1f5303.svg#card=math&code=%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%9AJ%28w%2Cb%29%3D1%2F2n%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29%5E2%0A&id=AfMhg">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/b041eaef8c71ffc17033b1980c8ed270.svg#card=math&code=%E8%AF%81%E6%98%8E%E8%BF%87%E7%A8%8B%EF%BC%9A%CE%B4J%2F%CE%B4w%3D1%2Fn%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29x_i%5C%5C%0A%20%20%20%20%20%CE%B4%5E2J%2F%CE%B4w%5E2%3D1%2Fn%5Csum_%7Bi%3D1%7D%5Enx_i%5E2%20%20%5Cquad%20%E6%81%92%E5%A4%A7%E4%BA%8E0%5C%5C%0A%0A%E5%90%8C%E7%90%86%EF%BC%9A%CE%B4J%2F%CE%B4b%3D1%5C%5C%0A%20%CE%B4%5E2J%2F%CE%B4w%5E2%3D0%20%5Cquad%20%E6%81%92%E7%AD%89%E4%BA%8E0%5C%5C%0A%E5%88%99%E5%BE%97%E8%AF%81%EF%BC%9A%E5%9D%87%E6%96%B9%E5%B7%AE%E7%9A%84%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E6%98%AF%E5%87%B8%E5%87%BD%E6%95%B0%5C%5C%0A&id=Cc0EY">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678724246644-45ac9a8c-6adf-4f03-b81e-65195263b327.png#averageHue=%23faf7f7&clientId=ufd5eaf1b-dfc5-4&from=paste&height=274&id=u1cde1e25&name=9fdafac02056fda124d0857eb7d692d8_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=25775&status=done&style=none&taskId=uc5301024-df64-45a1-8c4c-fbe3c1c5a19&title=&width=365.7142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1678724254675-349258cc-40b0-47ca-924b-edf252fe4bdd.jpeg#averageHue=%23f8f3f3&clientId=ufd5eaf1b-dfc5-4&from=paste&height=274&id=u62f4d506&name=240f6f64e28e7355ee991f8f691a4202_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.jpg&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=68092&status=done&style=none&taskId=uf013cf1c-0f64-48ee-bf06-fac112d1905&title=&width=365.7142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/607576050ff4fec53f7687f2295751e8.svg#card=math&code=%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%85%AC%E5%BC%8F%EF%BC%9A%0A%CE%B8%3D%CE%B8-%CE%B1%E2%96%BDJ%28%CE%B8%29%0A&id=MBk08">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678725072634-d4cdfb96-7378-4336-b5a7-e0369f7f4b32.png#averageHue=%23fcf8f8&clientId=ufd5eaf1b-dfc5-4&from=paste&height=354&id=u7e0e0138&name=0d49b7cadb14c64536b6d3d25004d3ba_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=38811&status=done&style=none&taskId=u944fe7ef-0346-4861-8ea0-c76b4fc415a&title=&width=471.71429443359375">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678725113764-f5f4739b-adc3-486e-9496-ebd06923fdd6.png#averageHue=%23fbf7f7&clientId=ufd5eaf1b-dfc5-4&from=paste&height=314&id=u148804e4&name=9b2361add7a06795362c84cb5f639a6d_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=26008&status=done&style=none&taskId=u9500663b-7331-40f4-a2c6-c33c5889cbd&title=&width=418.71429443359375">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678724821195-0ee6b8bd-79ee-4302-9e1b-46d547f7e46f.png#averageHue=%23faf5ea&clientId=ufd5eaf1b-dfc5-4&from=paste&height=270&id=u93a623fc&name=33de3c37c721bf09cdaa69b975232141_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=258&originWidth=545&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=105245&status=done&style=none&taskId=ue4546480-4f48-48d4-99d2-3645e3654a2&title=&width=569.4285888671875">
+<meta property="article:published_time" content="2023-03-13T15:44:15.000Z">
+<meta property="article:modified_time" content="2023-03-14T01:20:21.113Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/__latex/42b9ca7f2d288759b2f65bda2eebf946.svg#card=math&code=%E5%9D%87%E6%96%B9%E5%B7%AE%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%28w%5E%2A%2Cb%5E%2A%29%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28f%28x_i%29-y_i%29%5E2%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29%5E2%0A&id=UUdRq">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -407,346 +421,269 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-og367rd219bd00em" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      机器学习--梯度下降
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2023/03/13/og367rd219bd00em/" class="archive-article-date">
         <time datetime="2023-03-13T15:44:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-13</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">492字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">1分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+    <p>机器学习–梯度下降</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-代价函数"><a href="#1-代价函数" class="headerlink" title="1.代价函数"></a>1.代价函数</h1><p>个人理解：代价函数就是损失函数的进一步修正。<br><img src="https://cdn.nlark.com/yuque/__latex/42b9ca7f2d288759b2f65bda2eebf946.svg#card=math&code=%E5%9D%87%E6%96%B9%E5%B7%AE%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%28w%5E%2A%2Cb%5E%2A%29%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28f%28x_i%29-y_i%29%5E2%3Dargmin_%7B%28w%2Cb%29%7D%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29%5E2%0A&id=UUdRq"><br><img src="https://cdn.nlark.com/yuque/__latex/6df7b92cda4fdd0a6cec5a6e2c1f5303.svg#card=math&code=%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%9AJ%28w%2Cb%29%3D1%2F2n%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29%5E2%0A&id=AfMhg"></p>
+<blockquote>
+<p>其中，1&#x2F;n 是用来将方差平均化，而加个 2 是为了<strong>求导(梯度下降）</strong>时方便。</p>
+</blockquote>
+<hr>
+<h2 id="2-证明：均方差的代价函数是凸函数"><a href="#2-证明：均方差的代价函数是凸函数" class="headerlink" title="2.证明：均方差的代价函数是凸函数"></a>2.证明：均方差的代价函数是凸函数</h2><p><strong>这里可先跳过，看第 3 的内容。</strong></p>
+<hr>
+<p>在高等数学里面有如下定义 ：<br>二阶导大于或等于 0，则该函数为<strong>凹函数</strong>。<br>注意：机器学习里面，<strong>将凹函数称为凸函数</strong>。</p>
+<hr>
+<p><img src="https://cdn.nlark.com/yuque/__latex/b041eaef8c71ffc17033b1980c8ed270.svg#card=math&code=%E8%AF%81%E6%98%8E%E8%BF%87%E7%A8%8B%EF%BC%9A%CE%B4J%2F%CE%B4w%3D1%2Fn%5Csum_%7Bi%3D1%7D%5En%28wx_i%2Bb-y_i%29x_i%5C%5C%0A%20%20%20%20%20%CE%B4%5E2J%2F%CE%B4w%5E2%3D1%2Fn%5Csum_%7Bi%3D1%7D%5Enx_i%5E2%20%20%5Cquad%20%E6%81%92%E5%A4%A7%E4%BA%8E0%5C%5C%0A%0A%E5%90%8C%E7%90%86%EF%BC%9A%CE%B4J%2F%CE%B4b%3D1%5C%5C%0A%20%CE%B4%5E2J%2F%CE%B4w%5E2%3D0%20%5Cquad%20%E6%81%92%E7%AD%89%E4%BA%8E0%5C%5C%0A%E5%88%99%E5%BE%97%E8%AF%81%EF%BC%9A%E5%9D%87%E6%96%B9%E5%B7%AE%E7%9A%84%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E6%98%AF%E5%87%B8%E5%87%BD%E6%95%B0%5C%5C%0A&id=Cc0EY"></p>
+<hr>
+<h1 id="3-梯度下降"><a href="#3-梯度下降" class="headerlink" title="3.梯度下降"></a>3.梯度下降</h1><p>顾名思义：下楼梯，直到下到第一楼<strong>平坦</strong>的位置。<br>代价函数太高了，就得找可以降低代价函数的参数，这一过程就是梯度下降的过程。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678724246644-45ac9a8c-6adf-4f03-b81e-65195263b327.png#averageHue=%23faf7f7&clientId=ufd5eaf1b-dfc5-4&from=paste&height=274&id=u1cde1e25&name=9fdafac02056fda124d0857eb7d692d8_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=25775&status=done&style=none&taskId=uc5301024-df64-45a1-8c4c-fbe3c1c5a19&title=&width=365.7142857142857" alt="9fdafac02056fda124d0857eb7d692d8_watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc=,size_16,color_FFFFFF,t_70#pic_center.png"><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1678724254675-349258cc-40b0-47ca-924b-edf252fe4bdd.jpeg#averageHue=%23f8f3f3&clientId=ufd5eaf1b-dfc5-4&from=paste&height=274&id=u62f4d506&name=240f6f64e28e7355ee991f8f691a4202_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.jpg&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=68092&status=done&style=none&taskId=uf013cf1c-0f64-48ee-bf06-fac112d1905&title=&width=365.7142857142857" alt="240f6f64e28e7355ee991f8f691a4202_watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc=,size_16,color_FFFFFF,t_70#pic_center.jpg"></p>
+<hr>
+<p><img src="https://cdn.nlark.com/yuque/__latex/607576050ff4fec53f7687f2295751e8.svg#card=math&code=%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%85%AC%E5%BC%8F%EF%BC%9A%0A%CE%B8%3D%CE%B8-%CE%B1%E2%96%BDJ%28%CE%B8%29%0A&id=MBk08"></p>
+<blockquote>
+<p>其中，θ 表示参数，可以是 w 或 b<br>α 为学习率、步长、说白了就是每次跨步的步伐有多大<br>▽J(θ)为当前位置的梯度，说白了就是斜率<br>减号是因为斜率为负的，我们是要让参数往右走，那么就得减去斜率，即为加上斜率的绝对值。</p>
+</blockquote>
+<p>这一公式疯狂迭代，直到到达梯度为 0 的地方就停止，此时的参数即为最优的参数。</p>
+<hr>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678725072634-d4cdfb96-7378-4336-b5a7-e0369f7f4b32.png#averageHue=%23fcf8f8&clientId=ufd5eaf1b-dfc5-4&from=paste&height=354&id=u7e0e0138&name=0d49b7cadb14c64536b6d3d25004d3ba_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=38811&status=done&style=none&taskId=u944fe7ef-0346-4861-8ea0-c76b4fc415a&title=&width=471.71429443359375" alt="0d49b7cadb14c64536b6d3d25004d3ba_watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc=,size_16,color_FFFFFF,t_70#pic_center.png"><br>如图，学习率设置得很大，会出现左右横跳的行为。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678725113764-f5f4739b-adc3-486e-9496-ebd06923fdd6.png#averageHue=%23fbf7f7&clientId=ufd5eaf1b-dfc5-4&from=paste&height=314&id=u148804e4&name=9b2361add7a06795362c84cb5f639a6d_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=480&originWidth=640&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=26008&status=done&style=none&taskId=u9500663b-7331-40f4-a2c6-c33c5889cbd&title=&width=418.71429443359375" alt="9b2361add7a06795362c84cb5f639a6d_watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc=,size_16,color_FFFFFF,t_70#pic_center.png"><br>如图，学习率设置得很小，会出现缓慢下降到平缓的位置（收敛过慢）。</p>
+<hr>
+<h1 id="4-局部最小值"><a href="#4-局部最小值" class="headerlink" title="4.局部最小值"></a>4.局部最小值</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678724821195-0ee6b8bd-79ee-4302-9e1b-46d547f7e46f.png#averageHue=%23faf5ea&clientId=ufd5eaf1b-dfc5-4&from=paste&height=270&id=u93a623fc&name=33de3c37c721bf09cdaa69b975232141_watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70%23pic_center.png&originHeight=258&originWidth=545&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=105245&status=done&style=none&taskId=ue4546480-4f48-48d4-99d2-3645e3654a2&title=&width=569.4285888671875" alt="33de3c37c721bf09cdaa69b975232141_watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pheXNvbldvbmc=,size_16,color_FFFFFF,t_70#pic_center.png"><br>如图，有 A 和 B 两条路径，均能到达平坦的位置，但是对应的参数不同，这两个平坦的位置就是<strong>局部最小值(local minimum），也称极小值。</strong><br>那么就会有人纳闷：在线性回归中的均方差的代价函数不会有局部最小值问题吗？<br>答案：<strong>肯定没有！ 看上面第二条的证明。</strong></p>
+<hr>
+<p>一句话概括梯度下降：<strong>下楼梯，找到合适的参数符合模型</strong></p>
+
+    
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/03/13/og367rd219bd00em/" target="_blank">机器学习--梯度下降</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/03/13/og367rd219bd00em/" title="机器学习--梯度下降" target="_blank">http://wandefulha.github.io/2023/03/13/og367rd219bd00em/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
-          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
 
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/03/13/og367rd219bd00em/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/03/13/lomie8ithxp9g8vl/" class="archive-article-date">
-        <time datetime="2023-03-13T14:25:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-13</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/13/lomie8ithxp9g8vl/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">机器学习--线性模型(线性回归)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/03/13/lomie8ithxp9g8vl/" target="_blank">机器学习--线性模型(线性回归)</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">1.代价函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AF%81%E6%98%8E%EF%BC%9A%E5%9D%87%E6%96%B9%E5%B7%AE%E7%9A%84%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E6%98%AF%E5%87%B8%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">2.证明：均方差的代价函数是凸函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="toc-number">2.</span> <span class="toc-text">3.梯度下降</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-number">3.</span> <span class="toc-text">4.局部最小值</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/03/10/gcyiegzv9wdapyvg/" class="archive-article-date">
-        <time datetime="2023-03-10T07:54:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/03/10/gcyiegzv9wdapyvg/" target="_blank">协同过滤算法的初步认识</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/03/07/cghc9pw2bc9polei/" class="archive-article-date">
-        <time datetime="2023-03-07T13:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/03/07/cghc9pw2bc9polei/" target="_blank">C语言（一）结构体的内存计算</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/26/sxxt0qp48bqz5nwu/" class="archive-article-date">
-        <time datetime="2023-02-26T12:28:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/26/sxxt0qp48bqz5nwu/" target="_blank">回顾编程语言（二）Java基本概念</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/26/yzie30aez53w2g8x/" class="archive-article-date">
-        <time datetime="2023-02-26T06:02:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/26/yzie30aez53w2g8x/" target="_blank">回顾编程语言（一）C/C++基本概念</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/26/ngba1vwf88uenexg/" class="archive-article-date">
-        <time datetime="2023-02-26T05:22:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-26</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/26/ngba1vwf88uenexg/" target="_blank">回顾数据库（五）关系数据库设计理论</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/25/vy41iigqvxgziw9l/" class="archive-article-date">
-        <time datetime="2023-02-25T14:02:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/25/vy41iigqvxgziw9l/" target="_blank">回顾数据库（四）索引</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/24/xagrbg3wqqq3p0gy/" class="archive-article-date">
-        <time datetime="2023-02-24T13:22:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/24/xagrbg3wqqq3p0gy/" target="_blank">回顾数据库（二）并发一致性以及封锁粒度</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2023/02/22/psaxxgyhvq8cyh0u/" class="archive-article-date">
-        <time datetime="2023-02-22T14:54:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-22</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2023/02/22/psaxxgyhvq8cyh0u/" target="_blank">回顾数据库（三）三种模型</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -787,8 +724,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

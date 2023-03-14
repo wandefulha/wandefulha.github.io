@@ -204,21 +204,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wandefulha.github.io">
-  <title>钟学炫个人博客</title>
+  <title>机器学习--逻辑回归 | 钟学炫个人博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="钟学炫个人博客">
-<meta property="og:url" content="http://wandefulha.github.io/page/3/index.html">
+  <meta name="description" content="机器学习–逻辑回归（对数几率回归）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习--逻辑回归">
+<meta property="og:url" content="http://wandefulha.github.io/2023/03/14/ol9y1t2kr5uabl2v/index.html">
 <meta property="og:site_name" content="钟学炫个人博客">
+<meta property="og:description" content="机器学习–逻辑回归（对数几率回归）">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/72dba8a962892eba6639334f68a27f42.svg#card=math&code=S%28z%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D&id=qMkfd">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678763072200-3fe081f9-d503-4858-b263-d4316fb45522.png#averageHue=%23fafafa&clientId=u5ae4bbb2-4e2c-4&from=paste&height=285&id=ud0f0cff8&name=image.png&originHeight=499&originWidth=710&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=29144&status=done&style=none&taskId=ubf7c6544-2a99-4a88-8e74-5d79769b6f6&title=&width=405.7142857142857">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/53ec871e8a8e6f17f7bcf75c3335188e.svg#card=math&code=h%28x%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-%28wx%2Bb%29%7D%7D&id=hzICZ">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/7d6f058281abc9c943ce725136cace32.svg#card=math&code=%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%9AJ%28w%2Cb%29%3D-1%2Fn%5Csum_%7Bi%3D1%7D%5En%28y%5E%7B%28i%29%7Dln%28h%28x%5E%7B%28i%29%7D%29%29%2B%281-y%5E%7B%28i%29%7D%29ln%281-h%28x%5E%7B%28i%29%7D%29%29%29%0A&id=AfMhg">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678766339625-1a52684d-f8c2-4858-adeb-2558cc302ef1.png#averageHue=%23f8f8f8&clientId=u26014c08-28bb-4&from=paste&height=554&id=u4a18d333&name=image.png&originHeight=969&originWidth=1204&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=122386&status=done&style=none&taskId=u4b552324-0463-49a4-ba75-c1ed52410de&title=&width=688">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678766355012-853feff8-8031-4949-b3b2-bdc310924625.png#averageHue=%23f7f7f7&clientId=u26014c08-28bb-4&from=paste&height=213&id=uc2824622&name=image.png&originHeight=372&originWidth=1107&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=48758&status=done&style=none&taskId=uc2a74534-38b8-48cf-8ff5-b6c9f02d1f0&title=&width=632.5714285714286">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/__latex/607576050ff4fec53f7687f2295751e8.svg#card=math&code=%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%85%AC%E5%BC%8F%EF%BC%9A%0A%CE%B8%3D%CE%B8-%CE%B1%E2%96%BDJ%28%CE%B8%29%0A&id=mfGfT">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1678767437224-9654a19e-85b4-4bc7-92aa-d7a8c324bbcd.jpeg">
+<meta property="article:published_time" content="2023-03-14T02:49:06.000Z">
+<meta property="article:modified_time" content="2023-03-14T04:18:14.940Z">
 <meta property="article:author" content="ZXX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/__latex/72dba8a962892eba6639334f68a27f42.svg#card=math&code=S%28z%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D&id=qMkfd">
   
     <link rel="alternative" href="/atom.xml" title="钟学炫个人博客" type="application/atom+xml">
   
@@ -411,32 +420,53 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-ybkqmqhgsun69st5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ol9y1t2kr5uabl2v" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/ybkqmqhgsun69st5/" target="_blank">GIT（三）对所有的GIT代码进行总结</a>
-  
+    <h1 class="article-title" itemprop="name">
+      机器学习--逻辑回归
     </h1>
   
 
 
   
   
-<a href="/2023/02/13/ybkqmqhgsun69st5/" class="archive-article-date">
-        <time datetime="2023-02-13T14:25:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2023/03/14/ol9y1t2kr5uabl2v/" class="archive-article-date">
+        <time datetime="2023-03-14T02:49:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-14</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">837字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
@@ -449,13 +479,83 @@
     
 
     
-    <p>本文档将对所有的先前学过的 git 代码一一列举出来并简略总结用途。</p>
+    <p>机器学习–逻辑回归（对数几率回归）</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h1><p>生活上很多二分类问题，例如：{好瓜，坏瓜}，{好人，坏人}，{晴天，阴天}……，那么我们要将这些二分类问题与回归模型联系起来，通过回归模型来求解这些二分类问题，那么这就叫做<strong>逻辑回归（logistics regression）</strong>，又称对数几率回归。<br>逻辑回归不是回归，是逻辑上的回归，也就是它是用来解决分类问题。<br>那么，要将回归模型输出的值转化为分类值，就必须通过一个中介来转化，这个中介就是 <strong>Sigmoid 函数</strong></p>
+<h1 id="2-Sigmoid-函数"><a href="#2-Sigmoid-函数" class="headerlink" title="2.Sigmoid 函数"></a>2.<strong>Sigmoid 函数</strong></h1><p>像 S 形状一样的函数称为 Sigmoid 函数。通常用来指代<strong>对数几率函数：</strong><br><img src="https://cdn.nlark.com/yuque/__latex/72dba8a962892eba6639334f68a27f42.svg#card=math&code=S%28z%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D&id=qMkfd"><br>图形如下：<br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678763072200-3fe081f9-d503-4858-b263-d4316fb45522.png#averageHue=%23fafafa&clientId=u5ae4bbb2-4e2c-4&from=paste&height=285&id=ud0f0cff8&name=image.png&originHeight=499&originWidth=710&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=29144&status=done&style=none&taskId=ubf7c6544-2a99-4a88-8e74-5d79769b6f6&title=&width=405.7142857142857" alt="image.png"><br>从图中可以看到，输入一个 z 值，可以把 z 值转化为一个<strong>接近 0 或 1</strong>的 y 值。那么，我们就可以结合前面的线性回归模型，将 z 改为线性回归模型的输出值即** z&#x3D;wx+b**<br>那么，上面的对数几率函数就变成了：<br><img src="https://cdn.nlark.com/yuque/__latex/53ec871e8a8e6f17f7bcf75c3335188e.svg#card=math&code=h%28x%29%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-%28wx%2Bb%29%7D%7D&id=hzICZ"></p>
+<hr>
+<p>其实在上图中，我们可以看到在原点为分界线，并且值为 0.5，所以我们可以看成该函数输出值大于 0.5 时，为二分类的 1 标签，小于 0.5 时为二分类的 0 标签。并且刚好可以对应 0-1 的概率，那么我们就可以看成这个函数的输出值为概率。<br>例如： 我假定 标签 1 为好西瓜，标签 0 为坏西瓜<br>那么，输出值小于 0.5 为坏西瓜，输出值大于 0.5 为好西瓜。</p>
+<h1 id="3-损失函数"><a href="#3-损失函数" class="headerlink" title="3.损失函数"></a>3.损失函数</h1><p>在线性回归模型里面，我们知道我们所谓的机器学习其实就是在不断的根据损失函数调整我们模型的 w 和 b，所以在逻辑回归里面，我们也必须寻找一个<strong>损失函数（代价函数）</strong>。<br><img src="https://cdn.nlark.com/yuque/__latex/7d6f058281abc9c943ce725136cace32.svg#card=math&code=%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%9AJ%28w%2Cb%29%3D-1%2Fn%5Csum_%7Bi%3D1%7D%5En%28y%5E%7B%28i%29%7Dln%28h%28x%5E%7B%28i%29%7D%29%29%2B%281-y%5E%7B%28i%29%7D%29ln%281-h%28x%5E%7B%28i%29%7D%29%29%29%0A&id=AfMhg"><br>这个函数也称<strong>交叉熵</strong>。</p>
+<blockquote>
+<p>其中，y 为样本中的标签（正确答案），h(x)为对数几率函数(概率)<br>说白了，上面就一个函数：yln(h(x))，由于是二分类，自然也得加上(1-y)ln(1-h(x))<br>前面的负号是因为在机器学习里面，我们通常求梯度都是往低处求，而该函数为整数，所以加负号，变为梯度下降。</p>
+</blockquote>
+<h1 id="4-对损失函数求导（梯度下降）"><a href="#4-对损失函数求导（梯度下降）" class="headerlink" title="4.对损失函数求导（梯度下降）"></a>4.对损失函数求导（梯度下降）</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678766339625-1a52684d-f8c2-4858-adeb-2558cc302ef1.png#averageHue=%23f8f8f8&clientId=u26014c08-28bb-4&from=paste&height=554&id=u4a18d333&name=image.png&originHeight=969&originWidth=1204&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=122386&status=done&style=none&taskId=u4b552324-0463-49a4-ba75-c1ed52410de&title=&width=688" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/35144630/1678766355012-853feff8-8031-4949-b3b2-bdc310924625.png#averageHue=%23f7f7f7&clientId=u26014c08-28bb-4&from=paste&height=213&id=uc2824622&name=image.png&originHeight=372&originWidth=1107&originalType=binary%E2%88%B6=1.75&rotation=0&showTitle=false&size=48758&status=done&style=none&taskId=uc2a74534-38b8-48cf-8ff5-b6c9f02d1f0&title=&width=632.5714285714286" alt="image.png"><br>可以得知，其实求完导后，结果均方差的结果一样，这就可以得知二阶导也一样，从而可以证明为<strong>凸函数。则没有局部最小值的问题。</strong><br>那么就可以用梯度下降公式，进行求解找出最好的 w 和 b。</p>
+<hr>
+<p><img src="https://cdn.nlark.com/yuque/__latex/607576050ff4fec53f7687f2295751e8.svg#card=math&code=%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%85%AC%E5%BC%8F%EF%BC%9A%0A%CE%B8%3D%CE%B8-%CE%B1%E2%96%BDJ%28%CE%B8%29%0A&id=mfGfT"></p>
+<blockquote>
+<p>其中，θ 表示参数，可以是 w 或 b<br>α 为学习率、步长、说白了就是每次跨步的步伐有多大<br>▽J(θ)为当前位置的梯度，说白了就是斜率<br>减号是因为斜率为负的，我们是要让参数往右走，那么就得减去斜率，即为加上斜率的绝对值。</p>
+</blockquote>
+<p>这一公式疯狂迭代，直到到达梯度为 0 的地方就停止，此时的参数即为最优的参数。</p>
+<hr>
+<p>说白了，整个内容就如下图所示：<br><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/35144630/1678767437224-9654a19e-85b4-4bc7-92aa-d7a8c324bbcd.jpeg"></p>
+
     
-    <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/#more">more >></a>
     
-    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
     
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ZXX
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://wandefulha.github.io/2023/03/14/ol9y1t2kr5uabl2v/" title="机器学习--逻辑回归" target="_blank">http://wandefulha.github.io/2023/03/14/ol9y1t2kr5uabl2v/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -465,16 +565,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/ybkqmqhgsun69st5/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://wandefulha.github.io/2023/03/14/ol9y1t2kr5uabl2v/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/13/og367rd219bd00em/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">机器学习--梯度下降</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -489,346 +649,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cdm3h3mnuczi0hk8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/cdm3h3mnuczi0hk8/" target="_blank">GIT（二）GIT远程仓库的代码使用(GITHUB)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/cdm3h3mnuczi0hk8/" class="archive-article-date">
-        <time datetime="2023-02-13T13:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>本文档将实现 GIT 与远程仓库进行对接，从而将本地 GIT 仓库的分支与远程仓库的分支进行更新或修改，从而使得其他人可以协同开发等。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/cdm3h3mnuczi0hk8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">1.概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Sigmoid-%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">2.Sigmoid 函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3.损失函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AF%B9%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC%EF%BC%88%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4.对损失函数求导（梯度下降）</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-guwmxx84d22i7chm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/13/guwmxx84d22i7chm/" target="_blank">GIT（一）GIT的代码使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/13/guwmxx84d22i7chm/" class="archive-article-date">
-        <time datetime="2023-02-13T07:58:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>在上回了解了 GIT 的概念之后，本文档将对 git 常用指令进行解释与使用。</p>
-    
-    <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/13/guwmxx84d22i7chm/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-ifsil6g4ngc6qf1o" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/12/ifsil6g4ngc6qf1o/" target="_blank">什么是Git？Git的初步理解</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/12/ifsil6g4ngc6qf1o/" class="archive-article-date">
-        <time datetime="2023-02-12T14:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>很多人对 GIT 不了解，即使在大学里面听过一些教授的讲解，但是他们都没有讲解 GIT 是什么，为什么用 GIT，只是单纯扔个代码，做个实验，一节课就水过去了，所以本文档将对 GIT 进行初步的认识，不深入到 GIT 的使用和代码层面。</p>
-    
-    <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/12/ifsil6g4ngc6qf1o/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-mi0y1qt2a7v7ugu6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/02/11/mi0y1qt2a7v7ugu6/" target="_blank">hexo部署到github的实现过程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/02/11/mi0y1qt2a7v7ugu6/" class="archive-article-date">
-        <time datetime="2023-02-11T14:01:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-    <p>实现 hexo 与 github 的整合，将 hexo 静态页面博客部署到 github 中，从而通过 github 地址访问 hexo….</p>
-    
-    <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/#more">more >></a>
-    
-    
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/02/11/mi0y1qt2a7v7ugu6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
 
 
           </div>
@@ -868,8 +715,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
